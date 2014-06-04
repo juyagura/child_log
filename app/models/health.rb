@@ -3,7 +3,7 @@ class Health < ActiveRecord::Base
   belongs_to :user
   belongs_to :child
 
-  validates :description, :presense => true
-  validates :user_id, :presense => true
-  validates :child_id, :presense => true
+  validates :description, :presence => true
+  validates :user_id, :presence => true
+  validates :child_id, :presence => true
 end

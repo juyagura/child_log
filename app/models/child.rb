@@ -13,6 +13,6 @@ class Child < ActiveRecord::Base
   has_many :editing_users, :through => :editors, :source => :user
   has_many :viewing_users, :through => :viewers, :source => :user
 
-  validates :name, :presense => true
+  validates :name, :presence => true
 
 end

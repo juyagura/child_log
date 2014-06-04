@@ -4,12 +4,14 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
-         has_many :baths
-         has_many :diapers
-         has_many :foods
-         has_many :healths
-         has_many :notes
-         has_many :own_photos, :class_name => "Photo", :foreign_key => "user_id"
-         has_many :sleeps
-         has_many :accomplishments
+  has_many :baths
+  has_many :diapers
+  has_many :foods
+  has_many :healths
+  has_many :notes
+  has_many :own_photos, :class_name => "Photo", :foreign_key => "user_id"
+  has_many :sleeps
+  has_many :accomplishments
+
+  validates :username, :presence => true, :uniqueness => true
 end

@@ -4,7 +4,7 @@ class Photo < ActiveRecord::Base
   belongs_to :child
   has_many :photo_comments, :dependent => :destroy
 
-  validates :image, :presense => true
-  validates :user_id, :presense => true
-  validates :child_id, :presense => true
+  validates :image, :presence => true
+  validates :user_id, :presence => true
+  validates :child_id, :presence => true
 end
