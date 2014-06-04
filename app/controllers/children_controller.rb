@@ -1,6 +1,7 @@
 class ChildrenController < ApplicationController
   def index
-    @children = Child.all
+    # @children = Child.all
+    @children = current_user.viewable_children
   end
 
   def show
@@ -18,6 +19,21 @@ class ChildrenController < ApplicationController
     @child.sex = params[:sex]
 
     if @child.save
+      o = Owner.new
+      o.user_id = current_user.id
+      o.child_id = @child.id
+      o.save
+
+      e = Editor.new
+      e.user_id = current_user.id
+      e.child_id = @child.id
+      e.save
+
+      v = Viewer.new
+      v.user_id = current_user.id
+      v.child_id = @child.id
+      v.save
+
       redirect_to "/children", :notice => "Child created successfully."
     else
       render 'new'

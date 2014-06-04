@@ -8,6 +8,9 @@ class Child < ActiveRecord::Base
   has_many :photos, :dependent => :destroy
   has_many :sleeps, :dependent => :destroy
   has_many :accomplishments, :dependent => :destroy
+  has_many :owners, :dependent => :destroy
+  has_many :editors, :dependent => :destroy
+  has_many :viewers, :dependent => :destroy
 
   has_many :owning_users, :through => :owners, :source => :user
   has_many :editing_users, :through => :editors, :source => :user

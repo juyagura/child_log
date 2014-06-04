@@ -12,6 +12,11 @@ class User < ActiveRecord::Base
   has_many :own_photos, :class_name => "Photo", :foreign_key => "user_id"
   has_many :sleeps
   has_many :accomplishments
+  has_many :viewers
+
+  has_many :own_children, :through => :owners, :source => :child
+  has_many :editable_children, :through => :editors, :source => :child
+  has_many :viewable_children, :through => :viewers, :source => :child
 
   validates :username, :presence => true, :uniqueness => true
 end
