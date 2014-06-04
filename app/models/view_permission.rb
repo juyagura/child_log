@@ -1,4 +1,4 @@
-class Editor < ActiveRecord::Base
+class ViewPermission < ActiveRecord::Base
   belongs_to :user
   belongs_to :child
 end

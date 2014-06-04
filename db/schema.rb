@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140601034108) do
+ActiveRecord::Schema.define(version: 20140604210043) do
 
   create_table "accomplishments", force: true do |t|
     t.text     "description"
@@ -51,7 +51,7 @@ ActiveRecord::Schema.define(version: 20140601034108) do
     t.datetime "updated_at"
   end
 
-  create_table "editors", force: true do |t|
+  create_table "edit_permissions", force: true do |t|
     t.integer  "child_id"
     t.integer  "user_id"
     t.datetime "created_at"
@@ -88,7 +88,7 @@ ActiveRecord::Schema.define(version: 20140601034108) do
     t.datetime "updated_at"
   end
 
-  create_table "owners", force: true do |t|
+  create_table "own_permissions", force: true do |t|
     t.integer  "child_id"
     t.integer  "user_id"
     t.datetime "created_at"
@@ -143,7 +143,7 @@ ActiveRecord::Schema.define(version: 20140601034108) do
   add_index "users", ["email"], name: "index_users_on_email", unique: true
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
 
-  create_table "viewers", force: true do |t|
+  create_table "view_permissions", force: true do |t|
     t.integer  "child_id"
     t.integer  "user_id"
     t.datetime "created_at"

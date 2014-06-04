@@ -19,17 +19,17 @@ class ChildrenController < ApplicationController
     @child.sex = params[:sex]
 
     if @child.save
-      o = Owner.new
+      o = OwnPermission.new
       o.user_id = current_user.id
       o.child_id = @child.id
       o.save
 
-      e = Editor.new
+      e = EditPermission.new
       e.user_id = current_user.id
       e.child_id = @child.id
       e.save
 
-      v = Viewer.new
+      v = ViewPermission.new
       v.user_id = current_user.id
       v.child_id = @child.id
       v.save

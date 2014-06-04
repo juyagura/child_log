@@ -37,55 +37,55 @@ Rails.application.routes.draw do
   get('/delete_note/:id', { :controller => 'notes', :action => 'destroy' })
   #------------------------------
 
-  # Routes for the Owner resource:
+  # Routes for the OwnPermission resource:
   # CREATE
-  get('/owners/new', { :controller => 'owners', :action => 'new' })
-  get('/create_owner', { :controller => 'owners', :action => 'create' })
+  get('/own_permissions/new', { :controller => 'own_permissions', :action => 'new' })
+  get('/create_own_permission', { :controller => 'own_permissions', :action => 'create' })
 
   # READ
-  get('/owners', { :controller => 'owners', :action => 'index' })
-  get('/owners/:id', { :controller => 'owners', :action => 'show' })
+  get('/own_permissions', { :controller => 'own_permissions', :action => 'index' })
+  get('/own_permissions/:id', { :controller => 'own_permissions', :action => 'show' })
 
   # UPDATE
-  get('/owners/:id/edit', { :controller => 'owners', :action => 'edit' })
-  get('/update_owner/:id', { :controller => 'owners', :action => 'update' })
+  get('/own_permissions/:id/edit', { :controller => 'own_permissions', :action => 'edit' })
+  get('/update_own_permission/:id', { :controller => 'own_permissions', :action => 'update' })
 
   # DELETE
-  get('/delete_owner/:id', { :controller => 'owners', :action => 'destroy' })
+  get('/delete_own_permission/:id', { :controller => 'own_permissions', :action => 'destroy' })
   #------------------------------
 
-  # Routes for the Viewer resource:
+  # Routes for the ViewPermission resource:
   # CREATE
-  get('/viewers/new', { :controller => 'viewers', :action => 'new' })
-  get('/create_viewer', { :controller => 'viewers', :action => 'create' })
+  get('/view_permissions/new', { :controller => 'view_permissions', :action => 'new' })
+  get('/create_view_permission', { :controller => 'view_permissions', :action => 'create' })
 
   # READ
-  get('/viewers', { :controller => 'viewers', :action => 'index' })
-  get('/viewers/:id', { :controller => 'viewers', :action => 'show' })
+  get('/view_permissions', { :controller => 'view_permissions', :action => 'index' })
+  get('/view_permissions/:id', { :controller => 'view_permissions', :action => 'show' })
 
   # UPDATE
-  get('/viewers/:id/edit', { :controller => 'viewers', :action => 'edit' })
-  get('/update_viewer/:id', { :controller => 'viewers', :action => 'update' })
+  get('/view_permissions/:id/edit', { :controller => 'view_permissions', :action => 'edit' })
+  get('/update_view_permission/:id', { :controller => 'view_permissions', :action => 'update' })
 
   # DELETE
-  get('/delete_viewer/:id', { :controller => 'viewers', :action => 'destroy' })
+  get('/delete_view_permission/:id', { :controller => 'view_permissions', :action => 'destroy' })
   #------------------------------
 
-  # Routes for the Editor resource:
+  # Routes for the EditPermission resource:
   # CREATE
-  get('/editors/new', { :controller => 'editors', :action => 'new' })
-  get('/create_editor', { :controller => 'editors', :action => 'create' })
+  get('/edit_permissions/new', { :controller => 'edit_permissions', :action => 'new' })
+  get('/create_edit_permission', { :controller => 'edit_permissions', :action => 'create' })
 
   # READ
-  get('/editors', { :controller => 'editors', :action => 'index' })
-  get('/editors/:id', { :controller => 'editors', :action => 'show' })
+  get('/edit_permissions', { :controller => 'edit_permissions', :action => 'index' })
+  get('/edit_permissions/:id', { :controller => 'edit_permissions', :action => 'show' })
 
   # UPDATE
-  get('/editors/:id/edit', { :controller => 'editors', :action => 'edit' })
-  get('/update_editor/:id', { :controller => 'editors', :action => 'update' })
+  get('/edit_permissions/:id/edit', { :controller => 'edit_permissions', :action => 'edit' })
+  get('/update_edit_permission/:id', { :controller => 'edit_permissions', :action => 'update' })
 
   # DELETE
-  get('/delete_editor/:id', { :controller => 'editors', :action => 'destroy' })
+  get('/delete_edit_permission/:id', { :controller => 'edit_permissions', :action => 'destroy' })
   #------------------------------
 
   # Routes for the Accomplishment resource:
