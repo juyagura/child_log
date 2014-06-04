@@ -1,6 +1,5 @@
 class ChildrenController < ApplicationController
   def index
-    # @children = Child.all
     @children = current_user.viewable_children
   end
 
