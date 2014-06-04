@@ -11,4 +11,5 @@ class User < ActiveRecord::Base
          has_many :notes
          has_many :own_photos, :class_name => "Photo", :foreign_key => "user_id"
          has_many :sleeps
+         has_many :accomplishments
 end
