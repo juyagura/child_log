@@ -19,6 +19,11 @@ class ChildrenController < ApplicationController
     @photos = Photo.where({ :child_id => params[:id], :date => params[:date] })
   end
 
+  def datepick
+    redirect_to "/children/#{params[:child_id]}/#{params[:date]}"
+
+  end
+
   def new
     @child = Child.new
   end

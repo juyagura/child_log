@@ -1,6 +1,24 @@
 <div class="page-header">
   <h1><%= @child.name %>'s Daily Activities</h1>
   <h2><%= params[:date] %></h2>
+  <h4>
+    <form action="/datepick" class="form-inline">
+      <a href="/children/<%= params[:id] %>/<%= params[:date].to_date - 1 %>">&lt;&lt;Previous Day&nbsp;</a>
+        <div class="form-group">
+          <input type="text" id="datepicker" name="date" placeholder="Pick a Date" class="form-control">
+        </div>
+
+        <script type="text/javascript">
+          $('#datepicker').datepicker({
+            dateFormat: "yy-mm-dd"
+          });
+        </script>
+
+        <input type="hidden" name="child_id" value="<%= @child.id %>">
+        <button type="submit" class="btn btn-default">Go</button>
+      <a href="/children/<%= params[:id] %>/<%= params[:date].to_date + 1 %>">&nbsp;Next Day&gt;&gt;</a>
+    </form>
+  </h4>
 </div>
 
 <div>
