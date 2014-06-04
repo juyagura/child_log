@@ -1,0 +1,50 @@
+<div class="page-header">
+  <h1>Diapers</h1>
+</div>
+
+<p><a href="/diapers/new" class="btn btn-primary">Add a New Diaper</a></p>
+
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th>Category</th>
+      <th>Description</th>
+      <th>Date</th>
+      <th>Time</th>
+      <th>Child</th>
+      <th>User</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @diapers.each do |diaper| %>
+      <tr>
+        <td><%= diaper.category %></td>
+        <td><%= diaper.description %></td>
+        <td><%= diaper.date %></td>
+        <td><%= diaper.time %></td>
+        <td><%= diaper.child_id %></td>
+        <td><%= diaper.user_id %></td>
+        <td>
+          <a href="/diapers/<%= diaper.id %>" class="btn btn-primary">
+            <i class="fa fa-search-plus"></i>
+          </a>
+        </td>
+        <td>
+          <a href="/diapers/<%= diaper.id %>/edit" class="btn btn-warning">
+            <i class="fa fa-edit"></i>
+          </a>
+        </td>
+        <td>
+          <a href="/delete_diaper/<%= diaper.id %>" class="btn btn-danger">
+            <i class="fa fa-trash-o"></i>
+          </a>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+

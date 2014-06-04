@@ -1,0 +1,61 @@
+<div class="page-header">
+  <h1>Add Bath</h1>
+</div>
+
+<% if @bath.errors.any? %>
+  <% @bath.errors.full_messages.each do |message| %>
+    <div class="alert alert-dismissable alert-danger">
+      <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+      <%= message %>
+    </div>
+  <% end %>
+<% end %>
+
+
+<form action="/create_bath" class="form-horizontal">
+  <!-- Label and input for date -->
+  <div class="form-group">
+    <label for="date" class="col-sm-2 control-label">
+      Date
+    </label>
+    <div class="col-sm-10">
+      <input type="text" id="date" name="date" placeholder="Date" class="form-control" value="<%= @bath.date %>">
+    </div>
+  </div>
+
+  <!-- Label and input for time -->
+  <div class="form-group">
+    <label for="time" class="col-sm-2 control-label">
+      Time
+    </label>
+    <div class="col-sm-10">
+      <input type="text" id="time" name="time" placeholder="Time" class="form-control" value="<%= @bath.time %>">
+    </div>
+  </div>
+
+  <!-- Label and input for child_id -->
+  <div class="form-group">
+    <label for="child_id" class="col-sm-2 control-label">
+      Child
+    </label>
+    <div class="col-sm-10">
+      <input type="text" id="child_id" name="child_id" placeholder="Child" class="form-control" value="<%= @bath.child_id %>">
+    </div>
+  </div>
+
+  <!-- Label and input for user_id -->
+  <div class="form-group">
+    <label for="user_id" class="col-sm-2 control-label">
+      User
+    </label>
+    <div class="col-sm-10">
+      <input type="text" id="user_id" name="user_id" placeholder="User" class="form-control" value="<%= @bath.user_id %>">
+    </div>
+  </div>
+
+  <div class="form-group">
+    <div class="col-sm-offset-2 col-sm-10">
+      <input type="submit" value="Create Bath" class="btn btn-primary">
+    </div>
+  </div>
+</form>

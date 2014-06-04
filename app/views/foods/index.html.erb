@@ -1,0 +1,50 @@
+<div class="page-header">
+  <h1>Foods</h1>
+</div>
+
+<p><a href="/foods/new" class="btn btn-primary">Add a New Food</a></p>
+
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th>Category</th>
+      <th>Description</th>
+      <th>Date</th>
+      <th>Time</th>
+      <th>Child</th>
+      <th>User</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @foods.each do |food| %>
+      <tr>
+        <td><%= food.category %></td>
+        <td><%= food.description %></td>
+        <td><%= food.date %></td>
+        <td><%= food.time %></td>
+        <td><%= food.child_id %></td>
+        <td><%= food.user_id %></td>
+        <td>
+          <a href="/foods/<%= food.id %>" class="btn btn-primary">
+            <i class="fa fa-search-plus"></i>
+          </a>
+        </td>
+        <td>
+          <a href="/foods/<%= food.id %>/edit" class="btn btn-warning">
+            <i class="fa fa-edit"></i>
+          </a>
+        </td>
+        <td>
+          <a href="/delete_food/<%= food.id %>" class="btn btn-danger">
+            <i class="fa fa-trash-o"></i>
+          </a>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+

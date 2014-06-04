@@ -1,0 +1,48 @@
+<div class="page-header">
+  <h1>Accomplishments</h1>
+</div>
+
+<p><a href="/accomplishments/new" class="btn btn-primary">Add a New Accomplishment</a></p>
+
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th>Description</th>
+      <th>Date</th>
+      <th>Time</th>
+      <th>Child</th>
+      <th>User</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @accomplishments.each do |accomplishment| %>
+      <tr>
+        <td><%= accomplishment.description %></td>
+        <td><%= accomplishment.date %></td>
+        <td><%= accomplishment.time %></td>
+        <td><%= accomplishment.child_id %></td>
+        <td><%= accomplishment.user_id %></td>
+        <td>
+          <a href="/accomplishments/<%= accomplishment.id %>" class="btn btn-primary">
+            <i class="fa fa-search-plus"></i>
+          </a>
+        </td>
+        <td>
+          <a href="/accomplishments/<%= accomplishment.id %>/edit" class="btn btn-warning">
+            <i class="fa fa-edit"></i>
+          </a>
+        </td>
+        <td>
+          <a href="/delete_accomplishment/<%= accomplishment.id %>" class="btn btn-danger">
+            <i class="fa fa-trash-o"></i>
+          </a>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
