@@ -7,6 +7,18 @@ class ChildrenController < ApplicationController
     @child = Child.find(params[:id])
   end
 
+  def dayview
+    @child = Child.find(params[:id])
+    @foods = Food.where({ :child_id => params[:id], :date => params[:date] })
+    @sleeps = Sleep.where({ :child_id => params[:id], :date => params[:date] })
+    @diapers = Diaper.where({ :child_id => params[:id], :date => params[:date] })
+    @baths = Bath.where({ :child_id => params[:id], :date => params[:date] })
+    @healths = Health.where({ :child_id => params[:id], :date => params[:date] })
+    @accomplishments = Accomplishment.where({ :child_id => params[:id], :date => params[:date] })
+    @notes = Note.where({ :child_id => params[:id], :date => params[:date] })
+    @photos = Photo.where({ :child_id => params[:id], :date => params[:date] })
+  end
+
   def new
     @child = Child.new
   end
