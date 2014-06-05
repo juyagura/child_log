@@ -1,5 +1,9 @@
 <div class="page-header">
-  <h1>Notes</h1>
+  <% if params[:child_id] != nil %>
+    <h1><%= Child.find(params[:child_id]).name %>'s Notes (Diaries)</h1>
+  <% else %>
+    <h1>Notes (Diaries)</h1>
+  <% end %>
 </div>
 
 <p><a href="/notes/new" class="btn btn-primary">Add a New Note</a></p>
@@ -7,9 +11,9 @@
 <table class="table table-hover">
   <thead>
     <tr>
-      <th>Content</th>
-      <th>Date</th>
       <th>Child</th>
+      <th>Date</th>
+      <th>Content</th>
       <th>User</th>
       <th></th>
       <th></th>
@@ -20,10 +24,10 @@
   <tbody>
     <% @notes.each do |note| %>
       <tr>
-        <td><%= note.content %></td>
+        <td><a href="/children/<%= note.child_id %>/dayview/<%= Date.today %>"><%= Child.find(note.child_id).name %></a></td>
         <td><%= note.date %></td>
-        <td><%= note.child_id %></td>
-        <td><%= note.user_id %></td>
+        <td><%= note.content %></td>
+        <td><%= User.find(note.user_id).username %></td>
         <td>
           <a href="/notes/<%= note.id %>" class="btn btn-primary">
             <i class="fa fa-search-plus"></i>

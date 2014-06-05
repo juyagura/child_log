@@ -5,4 +5,5 @@ class Bath < ActiveRecord::Base
 
   validates :user_id, :presence => true
   validates :child_id, :presence => true
+  validates :date, :presence => true
 end

@@ -3,6 +3,11 @@ class FoodsController < ApplicationController
     @foods = current_user.viewable_foods.order("date desc, time desc")
   end
 
+  def child_index
+    @foods = Child.find(params[:child_id]).foods.order("date desc, time desc")
+    render 'index'
+  end
+
   def show
     @food = Food.find(params[:id])
   end

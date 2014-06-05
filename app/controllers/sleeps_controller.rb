@@ -3,6 +3,11 @@ class SleepsController < ApplicationController
     @sleeps = current_user.viewable_sleeps.order("date desc, time desc")
   end
 
+  def child_index
+    @sleeps = Child.find(params[:child_id]).sleeps.order("date desc, time desc")
+    render 'index'
+  end
+
   def show
     @sleep = Sleep.find(params[:id])
   end

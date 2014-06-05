@@ -3,6 +3,11 @@ class HealthsController < ApplicationController
     @healths = current_user.viewable_healths.order("date desc, time desc")
   end
 
+  def child_index
+    @healths = Child.find(params[:child_id]).healths.order("date desc, time desc")
+    render 'index'
+  end
+
   def show
     @health = Health.find(params[:id])
   end

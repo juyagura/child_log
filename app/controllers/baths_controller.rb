@@ -3,6 +3,11 @@ class BathsController < ApplicationController
     @baths = current_user.viewable_baths.order("date desc, time desc")
   end
 
+  def child_index
+    @baths = Child.find(params[:child_id]).baths.order("date desc, time desc")
+    render 'index'
+  end
+
   def show
     @bath = Bath.find(params[:id])
   end

@@ -1,5 +1,9 @@
 <div class="page-header">
-  <h1>Foods</h1>
+  <% if params[:child_id] != nil %>
+    <h1><%= Child.find(params[:child_id]).name %>'s Feedings</h1>
+  <% else %>
+    <h1>Feedings</h1>
+  <% end %>
 </div>
 
 <p><a href="/foods/new" class="btn btn-primary">Add a New Food</a></p>
@@ -7,11 +11,11 @@
 <table class="table table-hover">
   <thead>
     <tr>
-      <th>Category</th>
-      <th>Description</th>
+      <th>Child</th>
       <th>Date</th>
       <th>Time</th>
-      <th>Child</th>
+      <th>Category</th>
+      <th>Description</th>
       <th>User</th>
       <th></th>
       <th></th>
@@ -22,12 +26,12 @@
   <tbody>
     <% @foods.each do |food| %>
       <tr>
+        <td><a href="/children/<%= food.child_id %>/dayview/<%= Date.today %>"><%= Child.find(food.child_id).name %></a></td>
+        <td><%= food.date %></td>
+        <td><%= food.time.strftime("%I:%M %p") %></td>
         <td><%= food.category %></td>
         <td><%= food.description %></td>
-        <td><%= food.date %></td>
-        <td><%= food.time %></td>
-        <td><%= food.child_id %></td>
-        <td><%= food.user_id %></td>
+        <td><%= User.find(food.user_id).username %></td>
         <td>
           <a href="/foods/<%= food.id %>" class="btn btn-primary">
             <i class="fa fa-search-plus"></i>

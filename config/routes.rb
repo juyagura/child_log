@@ -28,6 +28,7 @@ Rails.application.routes.draw do
   # READ
   get('/notes', { :controller => 'notes', :action => 'index' })
   get('/notes/:id', { :controller => 'notes', :action => 'show' })
+  get('/children/:child_id/notes', { :controller => 'notes', :action => 'child_index' })
 
   # UPDATE
   get('/notes/:id/edit', { :controller => 'notes', :action => 'edit' })
@@ -96,6 +97,7 @@ Rails.application.routes.draw do
   # READ
   get('/accomplishments', { :controller => 'accomplishments', :action => 'index' })
   get('/accomplishments/:id', { :controller => 'accomplishments', :action => 'show' })
+  get('/children/:child_id/accomplishments', { :controller => 'accomplishments', :action => 'child_index' })
 
   # UPDATE
   get('/accomplishments/:id/edit', { :controller => 'accomplishments', :action => 'edit' })
@@ -113,6 +115,7 @@ Rails.application.routes.draw do
   # READ
   get('/healths', { :controller => 'healths', :action => 'index' })
   get('/healths/:id', { :controller => 'healths', :action => 'show' })
+  get('/children/:child_id/healths', { :controller => 'healths', :action => 'child_index' })
 
   # UPDATE
   get('/healths/:id/edit', { :controller => 'healths', :action => 'edit' })
@@ -130,6 +133,7 @@ Rails.application.routes.draw do
   # READ
   get('/baths', { :controller => 'baths', :action => 'index' })
   get('/baths/:id', { :controller => 'baths', :action => 'show' })
+  get('/children/:child_id/baths', { :controller => 'baths', :action => 'child_index' })
 
   # UPDATE
   get('/baths/:id/edit', { :controller => 'baths', :action => 'edit' })
@@ -147,6 +151,7 @@ Rails.application.routes.draw do
   # READ
   get('/diapers', { :controller => 'diapers', :action => 'index' })
   get('/diapers/:id', { :controller => 'diapers', :action => 'show' })
+  get('/children/:child_id/diapers', { :controller => 'diapers', :action => 'child_index' })
 
   # UPDATE
   get('/diapers/:id/edit', { :controller => 'diapers', :action => 'edit' })
@@ -164,6 +169,7 @@ Rails.application.routes.draw do
   # READ
   get('/sleeps', { :controller => 'sleeps', :action => 'index' })
   get('/sleeps/:id', { :controller => 'sleeps', :action => 'show' })
+  get('/children/:child_id/sleeps', { :controller => 'sleeps', :action => 'child_index' })
 
   # UPDATE
   get('/sleeps/:id/edit', { :controller => 'sleeps', :action => 'edit' })
@@ -181,6 +187,7 @@ Rails.application.routes.draw do
   # READ
   get('/foods', { :controller => 'foods', :action => 'index' })
   get('/foods/:id', { :controller => 'foods', :action => 'show' })
+  get('/children/:child_id/foods', { :controller => 'foods', :action => 'child_index' })
 
   # UPDATE
   get('/foods/:id/edit', { :controller => 'foods', :action => 'edit' })
@@ -198,6 +205,7 @@ Rails.application.routes.draw do
   # READ
   get('/photos', { :controller => 'photos', :action => 'index' })
   get('/photos/:id', { :controller => 'photos', :action => 'show' })
+  get('/children/:child_id/photos', { :controller => 'photos', :action => 'child_index' })
 
   # UPDATE
   get('/photos/:id/edit', { :controller => 'photos', :action => 'edit' })
@@ -215,7 +223,7 @@ Rails.application.routes.draw do
   # READ
   get('/children', { :controller => 'children', :action => 'index' })
   get('/children/:id', { :controller => 'children', :action => 'show' })
-  get('/children/:id/:date', { :controller => 'children', :action => 'dayview' })
+  get('/children/:id/dayview/:date', { :controller => 'children', :action => 'dayview' })
   get('/datepick', { :controller => 'children', :action => 'datepick' })
 
   # UPDATE

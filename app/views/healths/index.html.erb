@@ -1,5 +1,9 @@
 <div class="page-header">
-  <h1>Healths</h1>
+  <% if params[:child_id] != nil %>
+    <h1><%= Child.find(params[:child_id]).name %>'s Health Issues</h1>
+  <% else %>
+    <h1>Health Issues</h1>
+  <% end %>
 </div>
 
 <p><a href="/healths/new" class="btn btn-primary">Add a New Health</a></p>
@@ -7,10 +11,10 @@
 <table class="table table-hover">
   <thead>
     <tr>
-      <th>Description</th>
+      <th>Child</th>
       <th>Date</th>
       <th>Time</th>
-      <th>Child</th>
+      <th>Description</th>
       <th>User</th>
       <th></th>
       <th></th>
@@ -21,11 +25,11 @@
   <tbody>
     <% @healths.each do |health| %>
       <tr>
-        <td><%= health.description %></td>
+        <td><a href="/children/<%= health.child_id %>/dayview/<%= Date.today %>"><%= Child.find(health.child_id).name %></a></td>
         <td><%= health.date %></td>
-        <td><%= health.time %></td>
-        <td><%= health.child_id %></td>
-        <td><%= health.user_id %></td>
+        <td><%= health.time.strftime("%I:%M %p") %></td>
+        <td><%= health.description %></td>
+        <td><%= User.find(health.user_id).username %></td>
         <td>
           <a href="/healths/<%= health.id %>" class="btn btn-primary">
             <i class="fa fa-search-plus"></i>

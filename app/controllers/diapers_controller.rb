@@ -3,6 +3,11 @@ class DiapersController < ApplicationController
     @diapers = current_user.viewable_diapers.order("date desc, time desc")
   end
 
+  def child_index
+    @diapers = Child.find(params[:child_id]).diapers.order("date desc, time desc")
+    render 'index'
+  end
+
   def show
     @diaper = Diaper.find(params[:id])
   end

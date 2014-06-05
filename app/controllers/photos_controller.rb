@@ -3,6 +3,11 @@ class PhotosController < ApplicationController
     @photos = current_user.viewable_photos.order("date desc, id desc")
   end
 
+  def child_index
+    @photos = Child.find(params[:child_id]).photos.order("date desc, id desc")
+    render 'index'
+  end
+
   def show
     @photo = Photo.find(params[:id])
   end

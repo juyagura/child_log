@@ -3,6 +3,11 @@ class NotesController < ApplicationController
     @notes = current_user.viewable_notes.order("date desc")
   end
 
+  def child_index
+    @notes = Child.find(params[:child_id]).notes.order("date desc")
+    render 'index'
+  end
+
   def show
     @note = Note.find(params[:id])
   end

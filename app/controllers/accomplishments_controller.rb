@@ -3,6 +3,11 @@ class AccomplishmentsController < ApplicationController
     @accomplishments = current_user.viewable_accomplishments.order("date desc, time desc")
   end
 
+  def child_index
+    @accomplishments = Child.find(params[:child_id]).accomplishments.order("date desc, time desc")
+    render 'index'
+  end
+
   def show
     @accomplishment = Accomplishment.find(params[:id])
   end

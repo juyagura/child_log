@@ -1,5 +1,9 @@
 <div class="page-header">
-  <h1>Accomplishments</h1>
+  <% if params[:child_id] != nil %>
+    <h1><%= Child.find(params[:child_id]).name %>'s Accomplishments</h1>
+  <% else %>
+    <h1>Accomplishments</h1>
+  <% end %>
 </div>
 
 <p><a href="/accomplishments/new" class="btn btn-primary">Add a New Accomplishment</a></p>
@@ -7,10 +11,10 @@
 <table class="table table-hover">
   <thead>
     <tr>
-      <th>Description</th>
+      <th>Child</th>
       <th>Date</th>
       <th>Time</th>
-      <th>Child</th>
+      <th>Description</th>
       <th>User</th>
       <th></th>
       <th></th>
@@ -21,11 +25,11 @@
   <tbody>
     <% @accomplishments.each do |accomplishment| %>
       <tr>
-        <td><%= accomplishment.description %></td>
+        <td><a href="/children/<%= accomplishment.child_id %>/dayview/<%= Date.today %>"><%= Child.find(accomplishment.child_id).name %></a></td>
         <td><%= accomplishment.date %></td>
-        <td><%= accomplishment.time %></td>
-        <td><%= accomplishment.child_id %></td>
-        <td><%= accomplishment.user_id %></td>
+        <td><%= accomplishment.time.strftime("%I:%M %p") %></td>
+        <td><%= accomplishment.description %></td>
+        <td><%= User.find(accomplishment.user_id).username %></td>
         <td>
           <a href="/accomplishments/<%= accomplishment.id %>" class="btn btn-primary">
             <i class="fa fa-search-plus"></i>

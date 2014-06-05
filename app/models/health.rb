@@ -6,4 +6,5 @@ class Health < ActiveRecord::Base
   validates :description, :presence => true
   validates :user_id, :presence => true
   validates :child_id, :presence => true
+  validates :date, :presence => true
 end
