@@ -1,9 +1,9 @@
 <div class="page-header">
-  <h1>Edit Owner #<%= @owner.id %></h1>
+  <h1>Edit Own Permission #<%= @own_permission.id %></h1>
 </div>
 
-<% if @owner.errors.any? %>
-  <% @owner.errors.full_messages.each do |message| %>
+<% if @own_permission.errors.any? %>
+  <% @own_permission.errors.full_messages.each do |message| %>
     <div class="alert alert-dismissable alert-danger">
       <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
       <%= message %>
@@ -11,30 +11,36 @@
   <% end %>
 <% end %>
 
-<form action="/update_owner/<%= @owner.id %>" class="form-horizontal">
+<form action="/update_own_permission/<%= @own_permission.id %>" class="form-horizontal">
   <!-- Label and input for child_id -->
   <div class="form-group">
     <label for="child_id" class="col-sm-2 control-label">
       Child
     </label>
     <div class="col-sm-10">
-      <input type="text" id="child_id" name="child_id" placeholder="Child" class="form-control" value="<%= @owner.child_id %>">
+      <select name="child_id" class="form-control">
+        <% if @own_permission.child_id != nil %>
+          <option value="<%= @own_permission.child_id %>" selected><%= Child.find(@own_permission.child_id).name %></option>
+        <% end %>
+        <% current_user.own_children.each do |child| %>
+          <option value="<%= child.id %>">
+            <%= child.name %>
+          </option>
+        <% end %>
+      </select>
     </div>
   </div>
 
   <!-- Label and input for user_id -->
   <div class="form-group">
-    <label for="user_id" class="col-sm-2 control-label">
-      User
-    </label>
     <div class="col-sm-10">
-      <input type="text" id="user_id" name="user_id" placeholder="User" class="form-control" value="<%= @owner.user_id %>">
+      <input type="hidden" id="user_id" name="user_id" placeholder="User" class="form-control" value="<%= current_user.id %>">
     </div>
   </div>
 
   <div class="form-group">
     <div class="col-sm-offset-2 col-sm-10">
-      <input type="submit" value="Update Owner" class="btn btn-primary">
+      <input type="submit" value="Update Own Permission" class="btn btn-primary">
     </div>
   </div>
 </form>

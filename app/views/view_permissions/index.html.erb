@@ -1,8 +1,8 @@
 <div class="page-header">
-  <h1>Viewers</h1>
+  <h1>View Permissions</h1>
 </div>
 
-<p><a href="/viewers/new" class="btn btn-primary">Add a New Viewer</a></p>
+<p><a href="/view_permissions/new" class="btn btn-primary">Add a New View Permission</a></p>
 
 <table class="table table-hover">
   <thead>
@@ -16,22 +16,22 @@
   </thead>
 
   <tbody>
-    <% @viewers.each do |viewer| %>
+    <% @view_permissions.each do |view_permission| %>
       <tr>
-        <td><%= viewer.child_id %></td>
-        <td><%= viewer.user_id %></td>
+        <td><%= view_permission.child_id %></td>
+        <td><%= view_permission.user_id %></td>
         <td>
-          <a href="/viewers/<%= viewer.id %>" class="btn btn-primary">
+          <a href="/view_permissions/<%= view_permission.id %>" class="btn btn-primary">
             <i class="fa fa-search-plus"></i>
           </a>
         </td>
         <td>
-          <a href="/viewers/<%= viewer.id %>/edit" class="btn btn-warning">
+<!--           <a href="/view_permissions/<%= view_permission.id %>/edit" class="btn btn-warning">
             <i class="fa fa-edit"></i>
-          </a>
+          </a> -->
         </td>
         <td>
-          <a href="/delete_viewer/<%= viewer.id %>" class="btn btn-danger">
+          <a href="/delete_view_permission/<%= view_permission.id %>" class="btn btn-danger">
             <i class="fa fa-trash-o"></i>
           </a>
         </td>

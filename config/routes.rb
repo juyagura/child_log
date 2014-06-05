@@ -47,8 +47,8 @@ Rails.application.routes.draw do
   get('/own_permissions/:id', { :controller => 'own_permissions', :action => 'show' })
 
   # UPDATE
-  get('/own_permissions/:id/edit', { :controller => 'own_permissions', :action => 'edit' })
-  get('/update_own_permission/:id', { :controller => 'own_permissions', :action => 'update' })
+  # get('/own_permissions/:id/edit', { :controller => 'own_permissions', :action => 'edit' })
+  # get('/update_own_permission/:id', { :controller => 'own_permissions', :action => 'update' })
 
   # DELETE
   get('/delete_own_permission/:id', { :controller => 'own_permissions', :action => 'destroy' })
@@ -64,8 +64,8 @@ Rails.application.routes.draw do
   get('/view_permissions/:id', { :controller => 'view_permissions', :action => 'show' })
 
   # UPDATE
-  get('/view_permissions/:id/edit', { :controller => 'view_permissions', :action => 'edit' })
-  get('/update_view_permission/:id', { :controller => 'view_permissions', :action => 'update' })
+  # get('/view_permissions/:id/edit', { :controller => 'view_permissions', :action => 'edit' })
+  # get('/update_view_permission/:id', { :controller => 'view_permissions', :action => 'update' })
 
   # DELETE
   get('/delete_view_permission/:id', { :controller => 'view_permissions', :action => 'destroy' })
@@ -81,8 +81,8 @@ Rails.application.routes.draw do
   get('/edit_permissions/:id', { :controller => 'edit_permissions', :action => 'show' })
 
   # UPDATE
-  get('/edit_permissions/:id/edit', { :controller => 'edit_permissions', :action => 'edit' })
-  get('/update_edit_permission/:id', { :controller => 'edit_permissions', :action => 'update' })
+  # get('/edit_permissions/:id/edit', { :controller => 'edit_permissions', :action => 'edit' })
+  # get('/update_edit_permission/:id', { :controller => 'edit_permissions', :action => 'update' })
 
   # DELETE
   get('/delete_edit_permission/:id', { :controller => 'edit_permissions', :action => 'destroy' })

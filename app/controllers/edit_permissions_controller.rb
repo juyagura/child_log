@@ -14,12 +14,22 @@ class EditPermissionsController < ApplicationController
   def create
     @edit_permission = EditPermission.new
     @edit_permission.child_id = params[:child_id]
-    @edit_permission.user_id = params[:user_id]
-
-    if @edit_permission.save
-      redirect_to "/edit_permissions", :notice => "Edit Permission created successfully."
+    if User.find_by({ :username => params[:username]}) == nil
+      redirect_to "/edit_permissions/new?child_id=#{@edit_permission.child_id}&username=#{params[:username]}", :alert => "Username not found"
     else
-      render 'new'
+      @edit_permission.user_id = User.find_by({ :username => params[:username]}).id
+
+      if @edit_permission.save
+        unless User.find(@edit_permission.user_id).viewable_children.include?(Child.find(@edit_permission.child_id))
+          view_permission = ViewPermission.new
+          view_permission.child_id = @edit_permission.child_id
+          view_permission.user_id = @edit_permission.user_id
+          view_permission.save
+        end
+        redirect_to "/children/#{@edit_permission.child_id}/#{Date.today}", :notice => "Edit Permission created successfully."
+      else
+        render 'new'
+      end
     end
   end
 
@@ -34,7 +44,7 @@ class EditPermissionsController < ApplicationController
     @edit_permission.user_id = params[:user_id]
 
     if @edit_permission.save
-      redirect_to "/edit_permissions", :notice => "Edit Permission updated successfully."
+      redirect_to "/children/#{@edit_permission.child_id}/#{Date.today}", :notice => "Edit Permission updated successfully."
     else
       render 'edit'
     end
@@ -45,6 +55,6 @@ class EditPermissionsController < ApplicationController
 
     @edit_permission.destroy
 
-    redirect_to "/edit_permissions", :notice => "Edit Permission deleted."
+    redirect_to :back, :notice => "Edit Permission deleted."
   end
 end

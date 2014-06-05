@@ -19,6 +19,19 @@
       <a href="/children/<%= params[:id] %>/<%= params[:date].to_date + 1 %>">&nbsp;Next Day&gt;&gt;</a>
     </form>
   </h4>
+  <% if current_user.own_children.include?(@child) %>
+    <div class="row">
+      <div class="col-md-1">
+        <a href="/own_permissions/new?child_id=<%= @child.id %>"><button class="btn btn-warning">Add Owner</button></a>
+      </div>
+      <div class="col-md-1">
+        <a href="/edit_permissions/new?child_id=<%= @child.id %>"><button class="btn btn-warning">Add Editor</button></a>
+      </div>
+      <div class="col-md-10">
+        <a href="/view_permissions/new?child_id=<%= @child.id %>"><button class="btn btn-warning">Add Viewer</button></a>
+      </div>
+    </div>
+  <% end %>
 </div>
 
 <div>
@@ -52,14 +65,18 @@
             </a>
           </td>
           <td>
-            <a href="/foods/<%= food.id %>/edit" class="btn btn-warning">
-              <i class="fa fa-edit"></i>
-            </a>
+            <% if @child.editing_users.include?(current_user) %>
+              <a href="/foods/<%= food.id %>/edit" class="btn btn-warning">
+                <i class="fa fa-edit"></i>
+              </a>
+            <% end %>
           </td>
           <td>
-            <a href="/delete_food/<%= food.id %>" class="btn btn-danger">
-              <i class="fa fa-trash-o"></i>
-            </a>
+            <% if @child.editing_users.include?(current_user) %>
+              <a href="/delete_food/<%= food.id %>" class="btn btn-danger">
+                <i class="fa fa-trash-o"></i>
+              </a>
+            <% end %>
           </td>
         </tr>
       <% end %>
@@ -93,19 +110,23 @@
           <td><%= sleep.duration_hours %></td>
           <td><%= User.find(sleep.user_id).username %></td>
           <td>
-            <a href="/sleeps/<%= sleep.id %>" class="btn btn-primary">
-              <i class="fa fa-search-plus"></i>
-            </a>
+              <a href="/sleeps/<%= sleep.id %>" class="btn btn-primary">
+                <i class="fa fa-search-plus"></i>
+              </a>
           </td>
           <td>
-            <a href="/sleeps/<%= sleep.id %>/edit" class="btn btn-warning">
-              <i class="fa fa-edit"></i>
-            </a>
+            <% if @child.editing_users.include?(current_user) %>
+              <a href="/sleeps/<%= sleep.id %>/edit" class="btn btn-warning">
+                <i class="fa fa-edit"></i>
+              </a>
+            <% end %>
           </td>
           <td>
-            <a href="/delete_sleep/<%= sleep.id %>" class="btn btn-danger">
-              <i class="fa fa-trash-o"></i>
-            </a>
+            <% if @child.editing_users.include?(current_user) %>
+              <a href="/delete_sleep/<%= sleep.id %>" class="btn btn-danger">
+                <i class="fa fa-trash-o"></i>
+              </a>
+            <% end %>
           </td>
         </tr>
       <% end %>
@@ -144,14 +165,18 @@
             </a>
           </td>
           <td>
-            <a href="/diapers/<%= diaper.id %>/edit" class="btn btn-warning">
-              <i class="fa fa-edit"></i>
-            </a>
+            <% if @child.editing_users.include?(current_user) %>
+              <a href="/diapers/<%= diaper.id %>/edit" class="btn btn-warning">
+                <i class="fa fa-edit"></i>
+              </a>
+            <% end %>
           </td>
           <td>
-            <a href="/delete_diaper/<%= diaper.id %>" class="btn btn-danger">
-              <i class="fa fa-trash-o"></i>
-            </a>
+            <% if @child.editing_users.include?(current_user) %>
+              <a href="/delete_diaper/<%= diaper.id %>" class="btn btn-danger">
+                <i class="fa fa-trash-o"></i>
+              </a>
+            <% end %>
           </td>
         </tr>
       <% end %>
@@ -186,14 +211,18 @@
             </a>
           </td>
           <td>
-            <a href="/baths/<%= bath.id %>/edit" class="btn btn-warning">
-              <i class="fa fa-edit"></i>
-            </a>
+            <% if @child.editing_users.include?(current_user) %>
+              <a href="/baths/<%= bath.id %>/edit" class="btn btn-warning">
+                <i class="fa fa-edit"></i>
+              </a>
+            <% end %>
           </td>
           <td>
-            <a href="/delete_bath/<%= bath.id %>" class="btn btn-danger">
-              <i class="fa fa-trash-o"></i>
-            </a>
+            <% if @child.editing_users.include?(current_user) %>
+              <a href="/delete_bath/<%= bath.id %>" class="btn btn-danger">
+                <i class="fa fa-trash-o"></i>
+              </a>
+            <% end %>
           </td>
         </tr>
       <% end %>
@@ -230,14 +259,18 @@
             </a>
           </td>
           <td>
-            <a href="/healths/<%= health.id %>/edit" class="btn btn-warning">
-              <i class="fa fa-edit"></i>
-            </a>
+            <% if @child.editing_users.include?(current_user) %>
+              <a href="/healths/<%= health.id %>/edit" class="btn btn-warning">
+                <i class="fa fa-edit"></i>
+              </a>
+            <% end %>
           </td>
           <td>
-            <a href="/delete_health/<%= health.id %>" class="btn btn-danger">
-              <i class="fa fa-trash-o"></i>
-            </a>
+            <% if @child.editing_users.include?(current_user) %>
+              <a href="/delete_health/<%= health.id %>" class="btn btn-danger">
+                <i class="fa fa-trash-o"></i>
+              </a>
+            <% end %>
           </td>
         </tr>
       <% end %>
@@ -274,14 +307,18 @@
             </a>
           </td>
           <td>
-            <a href="/accomplishments/<%= accomplishment.id %>/edit" class="btn btn-warning">
-              <i class="fa fa-edit"></i>
-            </a>
+            <% if @child.editing_users.include?(current_user) %>
+              <a href="/accomplishments/<%= accomplishment.id %>/edit" class="btn btn-warning">
+                <i class="fa fa-edit"></i>
+              </a>
+            <% end %>
           </td>
           <td>
-            <a href="/delete_accomplishment/<%= accomplishment.id %>" class="btn btn-danger">
-              <i class="fa fa-trash-o"></i>
-            </a>
+            <% if @child.editing_users.include?(current_user) %>
+              <a href="/delete_accomplishment/<%= accomplishment.id %>" class="btn btn-danger">
+                <i class="fa fa-trash-o"></i>
+              </a>
+            <% end %>
           </td>
         </tr>
       <% end %>
@@ -316,14 +353,18 @@
             </a>
           </td>
           <td>
-            <a href="/notes/<%= note.id %>/edit" class="btn btn-warning">
-              <i class="fa fa-edit"></i>
-            </a>
+            <% if @child.editing_users.include?(current_user) %>
+              <a href="/notes/<%= note.id %>/edit" class="btn btn-warning">
+                <i class="fa fa-edit"></i>
+              </a>
+            <% end %>
           </td>
           <td>
-            <a href="/delete_note/<%= note.id %>" class="btn btn-danger">
-              <i class="fa fa-trash-o"></i>
-            </a>
+            <% if @child.editing_users.include?(current_user) %>
+              <a href="/delete_note/<%= note.id %>" class="btn btn-danger">
+                <i class="fa fa-trash-o"></i>
+              </a>
+            <% end %>
           </td>
         </tr>
       <% end %>
@@ -360,14 +401,18 @@
             </a>
           </td>
           <td>
-            <a href="/photos/<%= photo.id %>/edit" class="btn btn-warning">
-              <i class="fa fa-edit"></i>
-            </a>
+            <% if @child.editing_users.include?(current_user) %>
+              <a href="/photos/<%= photo.id %>/edit" class="btn btn-warning">
+                <i class="fa fa-edit"></i>
+              </a>
+            <% end %>
           </td>
           <td>
-            <a href="/delete_photo/<%= photo.id %>" class="btn btn-danger">
-              <i class="fa fa-trash-o"></i>
-            </a>
+            <% if @child.editing_users.include?(current_user) %>
+              <a href="/delete_photo/<%= photo.id %>" class="btn btn-danger">
+                <i class="fa fa-trash-o"></i>
+              </a>
+            <% end %>
           </td>
         </tr>
       <% end %>
