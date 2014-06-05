@@ -16,7 +16,7 @@ class FoodsController < ApplicationController
     @food.category = params[:category]
     @food.description = params[:description]
     @food.date = params[:date]
-    @food.time = params[:time]
+    @food.time = params[:hour] + ":" + params[:minutes] + " " + params[:ampm]
     @food.child_id = params[:child_id]
     @food.user_id = params[:user_id]
 
@@ -37,7 +37,7 @@ class FoodsController < ApplicationController
     @food.category = params[:category]
     @food.description = params[:description]
     @food.date = params[:date]
-    @food.time = params[:time]
+    @food.time = params[:hour] + ":" + params[:minutes] + " " + params[:ampm]
     @food.child_id = params[:child_id]
     @food.user_id = params[:user_id]
 
