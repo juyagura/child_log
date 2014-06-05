@@ -1,6 +1,6 @@
 class SleepsController < ApplicationController
   def index
-    @sleeps = Sleep.all
+    @sleeps = current_user.viewable_sleeps.order("date desc, time desc")
   end
 
   def show

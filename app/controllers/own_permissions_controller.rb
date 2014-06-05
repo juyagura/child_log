@@ -1,6 +1,6 @@
 class OwnPermissionsController < ApplicationController
   def index
-    @own_permissions = OwnPermission.all
+    @own_permissions = current_user.own_permission_controls.order("child_id desc, id desc")
   end
 
   def show

@@ -1,6 +1,6 @@
 class HealthsController < ApplicationController
   def index
-    @healths = Health.all
+    @healths = current_user.viewable_healths.order("date desc, time desc")
   end
 
   def show

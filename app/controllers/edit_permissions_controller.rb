@@ -1,6 +1,6 @@
 class EditPermissionsController < ApplicationController
   def index
-    @edit_permissions = EditPermission.all
+    @edit_permissions = current_user.edit_permission_controls.order("child_id desc, id desc")
   end
 
   def show

@@ -1,6 +1,6 @@
 class DiapersController < ApplicationController
   def index
-    @diapers = Diaper.all
+    @diapers = current_user.viewable_diapers.order("date desc, time desc")
   end
 
   def show

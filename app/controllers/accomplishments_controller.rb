@@ -1,6 +1,6 @@
 class AccomplishmentsController < ApplicationController
   def index
-    @accomplishments = Accomplishment.all
+    @accomplishments = current_user.viewable_accomplishments.order("date desc, time desc")
   end
 
   def show

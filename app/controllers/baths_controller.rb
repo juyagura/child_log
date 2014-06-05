@@ -1,6 +1,6 @@
 class BathsController < ApplicationController
   def index
-    @baths = Bath.all
+    @baths = current_user.viewable_baths.order("date desc, time desc")
   end
 
   def show

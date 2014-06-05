@@ -1,6 +1,6 @@
 class PhotoCommentsController < ApplicationController
   def index
-    @photo_comments = PhotoComment.all
+    @photo_comments = current_user.viewable_photo_comments.order("id desc")
   end
 
   def show

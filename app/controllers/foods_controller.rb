@@ -1,6 +1,6 @@
 class FoodsController < ApplicationController
   def index
-    @foods = Food.all
+    @foods = current_user.viewable_foods.order("date desc, time desc")
   end
 
   def show

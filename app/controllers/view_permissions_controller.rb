@@ -1,6 +1,6 @@
 class ViewPermissionsController < ApplicationController
   def index
-    @view_permissions = ViewPermission.all
+    @view_permissions = current_user.view_permission_controls.order("child_id desc, id desc")
   end
 
   def show
