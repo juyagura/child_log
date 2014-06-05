@@ -20,7 +20,7 @@ class PhotosController < ApplicationController
     @photo.child_id = params[:child_id]
 
     if @photo.save
-      redirect_to "/photos", :notice => "Photo created successfully."
+      redirect_to "/children/#{@photo.child_id}/#{@photo.date}", :notice => "Photo created successfully."
     else
       render 'new'
     end
@@ -40,7 +40,7 @@ class PhotosController < ApplicationController
     @photo.child_id = params[:child_id]
 
     if @photo.save
-      redirect_to "/photos", :notice => "Photo updated successfully."
+      redirect_to "/children/#{@photo.child_id}/#{@photo.date}", :notice => "Photo updated successfully."
     else
       render 'edit'
     end
@@ -51,6 +51,6 @@ class PhotosController < ApplicationController
 
     @photo.destroy
 
-    redirect_to "/photos", :notice => "Photo deleted."
+    redirect_to :back, :notice => "Photo deleted."
   end
 end
