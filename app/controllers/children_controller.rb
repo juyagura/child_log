@@ -20,7 +20,7 @@ class ChildrenController < ApplicationController
   end
 
   def datepick
-    redirect_to "/children/#{params[:child_id]}/#{params[:date]}"
+    redirect_to "/children/#{params[:child_id]}/dayview/#{params[:date]}"
 
   end
 
