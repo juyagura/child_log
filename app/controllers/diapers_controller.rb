@@ -16,12 +16,12 @@ class DiapersController < ApplicationController
     @diaper.category = params[:category]
     @diaper.description = params[:description]
     @diaper.date = params[:date]
-    @diaper.time = params[:time]
+    @diaper.time = params[:hour] + ":" + params[:minutes] + " " + params[:ampm]
     @diaper.child_id = params[:child_id]
     @diaper.user_id = params[:user_id]
 
     if @diaper.save
-      redirect_to "/diapers", :notice => "Diaper created successfully."
+      redirect_to "/children/#{@diaper.child_id}/#{@diaper.date}", :notice => "Diaper created successfully."
     else
       render 'new'
     end
@@ -37,12 +37,12 @@ class DiapersController < ApplicationController
     @diaper.category = params[:category]
     @diaper.description = params[:description]
     @diaper.date = params[:date]
-    @diaper.time = params[:time]
+    @diaper.time = params[:hour] + ":" + params[:minutes] + " " + params[:ampm]
     @diaper.child_id = params[:child_id]
     @diaper.user_id = params[:user_id]
 
     if @diaper.save
-      redirect_to "/diapers", :notice => "Diaper updated successfully."
+      redirect_to "/children/#{@diaper.child_id}/#{@diaper.date}", :notice => "Diaper updated successfully."
     else
       render 'edit'
     end
@@ -53,6 +53,6 @@ class DiapersController < ApplicationController
 
     @diaper.destroy
 
-    redirect_to "/diapers", :notice => "Diaper deleted."
+    redirect_to :back, :notice => "Diaper deleted."
   end
 end

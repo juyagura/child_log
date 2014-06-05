@@ -22,7 +22,7 @@
 </div>
 
 <div>
-  <h2>Foods</h2>
+  <h2>Feedings</h2>
   <% if @child.editing_users.include?(current_user) %>
     <p><a href="/foods/new" class="btn btn-primary">Add a New Food</a></p>
   <% end %>
@@ -89,7 +89,7 @@
       <% @sleeps.each do |sleep| %>
         <tr>
           <td><%= sleep.category %></td>
-          <td><%= sleep.time %></td>
+          <td><%= sleep.time.strftime("%I:%M %p") %></td>
           <td><%= sleep.duration_hours %></td>
           <td><%= User.find(sleep.user_id).username %></td>
           <td>
@@ -136,7 +136,7 @@
         <tr>
           <td><%= diaper.category %></td>
           <td><%= diaper.description %></td>
-          <td><%= diaper.time %></td>
+          <td><%= diaper.time.strftime("%I:%M %p") %></td>
           <td><%= User.find(diaper.user_id).username %></td>
           <td>
             <a href="/diapers/<%= diaper.id %>" class="btn btn-primary">
@@ -178,7 +178,7 @@
     <tbody>
       <% @baths.each do |bath| %>
         <tr>
-          <td><%= bath.time %></td>
+          <td><%= bath.time.strftime("%I:%M %p") %></td>
           <td><%= User.find(bath.user_id).username %></td>
           <td>
             <a href="/baths/<%= bath.id %>" class="btn btn-primary">
@@ -222,7 +222,7 @@
       <% @healths.each do |health| %>
         <tr>
           <td><%= health.description %></td>
-          <td><%= health.time %></td>
+          <td><%= health.time.strftime("%I:%M %p") %></td>
           <td><%= User.find(health.user_id).username %></td>
           <td>
             <a href="/healths/<%= health.id %>" class="btn btn-primary">
@@ -266,7 +266,7 @@
       <% @accomplishments.each do |accomplishment| %>
         <tr>
           <td><%= accomplishment.description %></td>
-          <td><%= accomplishment.time %></td>
+          <td><%= accomplishment.time.strftime("%I:%M %p") %></td>
           <td><%= User.find(accomplishment.user_id).username %></td>
           <td>
             <a href="/accomplishments/<%= accomplishment.id %>" class="btn btn-primary">

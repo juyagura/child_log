@@ -21,7 +21,7 @@ class FoodsController < ApplicationController
     @food.user_id = params[:user_id]
 
     if @food.save
-      redirect_to "/foods", :notice => "Food created successfully."
+      redirect_to "/children/#{@food.child_id}/#{@food.date}", :notice => "Food created successfully."
     else
       render 'new'
     end
@@ -42,7 +42,7 @@ class FoodsController < ApplicationController
     @food.user_id = params[:user_id]
 
     if @food.save
-      redirect_to "/foods", :notice => "Food updated successfully."
+      redirect_to "/children/#{@food.child_id}/#{@food.date}", :notice => "Food updated successfully."
     else
       render 'edit'
     end
@@ -53,6 +53,6 @@ class FoodsController < ApplicationController
 
     @food.destroy
 
-    redirect_to "/foods", :notice => "Food deleted."
+    redirect_to :back, :notice => "Food deleted."
   end
 end

@@ -15,12 +15,12 @@ class HealthsController < ApplicationController
     @health = Health.new
     @health.description = params[:description]
     @health.date = params[:date]
-    @health.time = params[:time]
+    @health.time = params[:hour] + ":" + params[:minutes] + " " + params[:ampm]
     @health.child_id = params[:child_id]
     @health.user_id = params[:user_id]
 
     if @health.save
-      redirect_to "/healths", :notice => "Health created successfully."
+      redirect_to "/children/#{@health.child_id}/#{@health.date}", :notice => "Health created successfully."
     else
       render 'new'
     end
@@ -35,12 +35,12 @@ class HealthsController < ApplicationController
 
     @health.description = params[:description]
     @health.date = params[:date]
-    @health.time = params[:time]
+    @health.time = params[:hour] + ":" + params[:minutes] + " " + params[:ampm]
     @health.child_id = params[:child_id]
     @health.user_id = params[:user_id]
 
     if @health.save
-      redirect_to "/healths", :notice => "Health updated successfully."
+      redirect_to "/children/#{@health.child_id}/#{@health.date}", :notice => "Health updated successfully."
     else
       render 'edit'
     end
@@ -51,6 +51,6 @@ class HealthsController < ApplicationController
 
     @health.destroy
 
-    redirect_to "/healths", :notice => "Health deleted."
+    redirect_to :back, :notice => "Health deleted."
   end
 end

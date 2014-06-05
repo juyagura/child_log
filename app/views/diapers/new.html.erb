@@ -19,7 +19,14 @@
       Category
     </label>
     <div class="col-sm-10">
-      <input type="text" id="category" name="category" placeholder="Category" class="form-control" value="<%= @diaper.category %>">
+      <select type="text" id="category" name="category" class="form-control">
+        <% if @diaper.category != nil %>
+          <option value="<%= @diaper.category %>" selected><%= @diaper.category %></option>
+        <% end %>
+        <option value="Pee">Pee</option>
+        <option value="Poop">Poop</option>
+        <option value="Both">Both</option>
+      </select>
     </div>
   </div>
 
@@ -50,12 +57,47 @@
   </script>
 
   <!-- Label and input for time -->
-  <div class="form-group">
+  <div class="form-group form-inline">
     <label for="time" class="col-sm-2 control-label">
       Time
     </label>
     <div class="col-sm-10">
-      <input type="text" id="time" name="time" placeholder="Time" class="form-control" value="<%= @diaper.time %>">
+      <select type="text" id="hour" name="hour" class="form-control">
+        <% if @diaper.time != nil %>
+          <option value="<%= @diaper.time.strftime('%I') %>" selected><%= @diaper.time.strftime("%I") %></option>
+        <% end %>
+        <option value="01">01</option>
+        <option value="02">02</option>
+        <option value="03">03</option>
+        <option value="04">04</option>
+        <option value="05">05</option>
+        <option value="06">06</option>
+        <option value="07">07</option>
+        <option value="08">08</option>
+        <option value="09">09</option>
+        <option value="10">10</option>
+        <option value="11">11</option>
+        <option value="12">12</option>
+      </select>
+      :
+      <select type="text" id="minutes" name="minutes" class="form-control">
+        <% if @diaper.time != nil %>
+          <option value="<%= @diaper.time.strftime('%M') %>"><%= @diaper.time.strftime("%M") %></option>
+        <% end %>
+        <option value="00">00</option>
+        <option value="10">10</option>
+        <option value="20">20</option>
+        <option value="30">30</option>
+        <option value="40">40</option>
+        <option value="50">50</option>
+      </select>
+      <select type="text" id="ampm" name="ampm" class="form-control">
+        <% if @diaper.time != nil %>
+          <option value="<%= @diaper.time.strftime('%p') %>"><%= @diaper.time.strftime("%p") %></option>
+        <% end %>
+        <option value="AM">AM</option>
+        <option value="PM">PM</option>
+      </select>
     </div>
   </div>
 
@@ -65,7 +107,16 @@
       Child
     </label>
     <div class="col-sm-10">
-      <input type="text" id="child_id" name="child_id" placeholder="Child" class="form-control" value="<%= @diaper.child_id %>">
+      <select name="child_id" class="form-control">
+        <% if @diaper.child_id != nil %>
+          <option value="<%= @diaper.child_id %>" selected><%= Child.find(@diaper.child_id).name %></option>
+        <% end %>
+        <% current_user.editable_children.each do |child| %>
+          <option value="<%= child.id %>">
+            <%= child.name %>
+          </option>
+        <% end %>
+      </select>
     </div>
   </div>
 

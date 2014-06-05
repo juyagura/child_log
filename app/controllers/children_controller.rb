@@ -9,12 +9,12 @@ class ChildrenController < ApplicationController
 
   def dayview
     @child = Child.find(params[:id])
-    @foods = Food.where({ :child_id => params[:id], :date => params[:date] })
-    @sleeps = Sleep.where({ :child_id => params[:id], :date => params[:date] })
-    @diapers = Diaper.where({ :child_id => params[:id], :date => params[:date] })
-    @baths = Bath.where({ :child_id => params[:id], :date => params[:date] })
-    @healths = Health.where({ :child_id => params[:id], :date => params[:date] })
-    @accomplishments = Accomplishment.where({ :child_id => params[:id], :date => params[:date] })
+    @foods = Food.where({ :child_id => params[:id], :date => params[:date] }).order("time desc")
+    @sleeps = Sleep.where({ :child_id => params[:id], :date => params[:date] }).order("time desc")
+    @diapers = Diaper.where({ :child_id => params[:id], :date => params[:date] }).order("time desc")
+    @baths = Bath.where({ :child_id => params[:id], :date => params[:date] }).order("time desc")
+    @healths = Health.where({ :child_id => params[:id], :date => params[:date] }).order("time desc")
+    @accomplishments = Accomplishment.where({ :child_id => params[:id], :date => params[:date] }).order("time desc")
     @notes = Note.where({ :child_id => params[:id], :date => params[:date] })
     @photos = Photo.where({ :child_id => params[:id], :date => params[:date] })
   end

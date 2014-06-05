@@ -19,7 +19,7 @@ class NotesController < ApplicationController
     @note.user_id = params[:user_id]
 
     if @note.save
-      redirect_to "/notes", :notice => "Note created successfully."
+      redirect_to "/children/#{@note.child_id}/#{@note.date}", :notice => "Note created successfully."
     else
       render 'new'
     end
@@ -38,7 +38,7 @@ class NotesController < ApplicationController
     @note.user_id = params[:user_id]
 
     if @note.save
-      redirect_to "/notes", :notice => "Note updated successfully."
+      redirect_to "/children/#{@note.child_id}/#{@note.date}", :notice => "Note updated successfully."
     else
       render 'edit'
     end
@@ -49,6 +49,6 @@ class NotesController < ApplicationController
 
     @note.destroy
 
-    redirect_to "/notes", :notice => "Note deleted."
+    redirect_to :back, :notice => "Note deleted."
   end
 end

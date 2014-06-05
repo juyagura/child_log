@@ -28,17 +28,58 @@
       Date
     </label>
     <div class="col-sm-10">
-      <input type="text" id="date" name="date" placeholder="Date" class="form-control" value="<%= @accomplishment.date %>">
+      <input type="text" id="datepicker" name="date" placeholder="Date" class="form-control" value="<%= @accomplishment.date %>">
     </div>
   </div>
 
+  <script type="text/javascript">
+    $('#datepicker').datepicker({
+      dateFormat: "yy-mm-dd"
+    });
+  </script>
+
   <!-- Label and input for time -->
-  <div class="form-group">
+  <div class="form-group form-inline">
     <label for="time" class="col-sm-2 control-label">
       Time
     </label>
     <div class="col-sm-10">
-      <input type="text" id="time" name="time" placeholder="Time" class="form-control" value="<%= @accomplishment.time %>">
+      <select type="text" id="hour" name="hour" class="form-control">
+        <% if @accomplishment.time != nil %>
+          <option value="<%= @accomplishment.time.strftime('%I') %>" selected><%= @accomplishment.time.strftime("%I") %></option>
+        <% end %>
+        <option value="01">01</option>
+        <option value="02">02</option>
+        <option value="03">03</option>
+        <option value="04">04</option>
+        <option value="05">05</option>
+        <option value="06">06</option>
+        <option value="07">07</option>
+        <option value="08">08</option>
+        <option value="09">09</option>
+        <option value="10">10</option>
+        <option value="11">11</option>
+        <option value="12">12</option>
+      </select>
+      :
+      <select type="text" id="minutes" name="minutes" class="form-control">
+        <% if @accomplishment.time != nil %>
+          <option value="<%= @accomplishment.time.strftime('%M') %>"><%= @accomplishment.time.strftime("%M") %></option>
+        <% end %>
+        <option value="00">00</option>
+        <option value="10">10</option>
+        <option value="20">20</option>
+        <option value="30">30</option>
+        <option value="40">40</option>
+        <option value="50">50</option>
+      </select>
+      <select type="text" id="ampm" name="ampm" class="form-control">
+        <% if @accomplishment.time != nil %>
+          <option value="<%= @accomplishment.time.strftime('%p') %>"><%= @accomplishment.time.strftime("%p") %></option>
+        <% end %>
+        <option value="AM">AM</option>
+        <option value="PM">PM</option>
+      </select>
     </div>
   </div>
 
@@ -48,17 +89,23 @@
       Child
     </label>
     <div class="col-sm-10">
-      <input type="text" id="child_id" name="child_id" placeholder="Child" class="form-control" value="<%= @accomplishment.child_id %>">
+      <select name="child_id" class="form-control">
+        <% if @accomplishment.child_id != nil %>
+          <option value="<%= @accomplishment.child_id %>" selected><%= Child.find(@accomplishment.child_id).name %></option>
+        <% end %>
+        <% current_user.editable_children.each do |child| %>
+          <option value="<%= child.id %>">
+            <%= child.name %>
+          </option>
+        <% end %>
+      </select>
     </div>
   </div>
 
   <!-- Label and input for user_id -->
   <div class="form-group">
-    <label for="user_id" class="col-sm-2 control-label">
-      User
-    </label>
     <div class="col-sm-10">
-      <input type="text" id="user_id" name="user_id" placeholder="User" class="form-control" value="<%= @accomplishment.user_id %>">
+      <input type="hidden" id="user_id" name="user_id" placeholder="User" class="form-control" value="<%= current_user.id %>">
     </div>
   </div>
 

@@ -14,12 +14,12 @@ class BathsController < ApplicationController
   def create
     @bath = Bath.new
     @bath.date = params[:date]
-    @bath.time = params[:time]
+    @bath.time = params[:hour] + ":" + params[:minutes] + " " + params[:ampm]
     @bath.child_id = params[:child_id]
     @bath.user_id = params[:user_id]
 
     if @bath.save
-      redirect_to "/baths", :notice => "Bath created successfully."
+      redirect_to "/children/#{@bath.child_id}/#{@bath.date}", :notice => "Bath created successfully."
     else
       render 'new'
     end
@@ -33,12 +33,12 @@ class BathsController < ApplicationController
     @bath = Bath.find(params[:id])
 
     @bath.date = params[:date]
-    @bath.time = params[:time]
+    @bath.time = params[:hour] + ":" + params[:minutes] + " " + params[:ampm]
     @bath.child_id = params[:child_id]
     @bath.user_id = params[:user_id]
 
     if @bath.save
-      redirect_to "/baths", :notice => "Bath updated successfully."
+      redirect_to "/children/#{@bath.child_id}/#{@bath.date}", :notice => "Bath updated successfully."
     else
       render 'edit'
     end
@@ -49,6 +49,6 @@ class BathsController < ApplicationController
 
     @bath.destroy
 
-    redirect_to "/baths", :notice => "Bath deleted."
+    redirect_to :back, :notice => "Bath deleted."
   end
 end

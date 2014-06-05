@@ -15,12 +15,12 @@ class AccomplishmentsController < ApplicationController
     @accomplishment = Accomplishment.new
     @accomplishment.description = params[:description]
     @accomplishment.date = params[:date]
-    @accomplishment.time = params[:time]
+    @accomplishment.time = params[:hour] + ":" + params[:minutes] + " " + params[:ampm]
     @accomplishment.child_id = params[:child_id]
     @accomplishment.user_id = params[:user_id]
 
     if @accomplishment.save
-      redirect_to "/accomplishments", :notice => "Accomplishment created successfully."
+      redirect_to "/children/#{@accomplishment.child_id}/#{@accomplishment.date}", :notice => "Accomplishment created successfully."
     else
       render 'new'
     end
@@ -35,12 +35,12 @@ class AccomplishmentsController < ApplicationController
 
     @accomplishment.description = params[:description]
     @accomplishment.date = params[:date]
-    @accomplishment.time = params[:time]
+    @accomplishment.time = params[:hour] + ":" + params[:minutes] + " " + params[:ampm]
     @accomplishment.child_id = params[:child_id]
     @accomplishment.user_id = params[:user_id]
 
     if @accomplishment.save
-      redirect_to "/accomplishments", :notice => "Accomplishment updated successfully."
+      redirect_to "/children/#{@accomplishment.child_id}/#{@accomplishment.date}", :notice => "Accomplishment updated successfully."
     else
       render 'edit'
     end
@@ -51,6 +51,6 @@ class AccomplishmentsController < ApplicationController
 
     @accomplishment.destroy
 
-    redirect_to "/accomplishments", :notice => "Accomplishment deleted."
+    redirect_to :back, :notice => "Accomplishment deleted."
   end
 end

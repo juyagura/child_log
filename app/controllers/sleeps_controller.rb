@@ -15,13 +15,13 @@ class SleepsController < ApplicationController
     @sleep = Sleep.new
     @sleep.category = params[:category]
     @sleep.date = params[:date]
-    @sleep.time = params[:time]
+    @sleep.time = params[:hour] + ":" + params[:minutes] + " " + params[:ampm]
     @sleep.duration_hours = params[:duration_hours]
     @sleep.child_id = params[:child_id]
     @sleep.user_id = params[:user_id]
 
     if @sleep.save
-      redirect_to "/sleeps", :notice => "Sleep created successfully."
+      redirect_to "/children/#{@sleep.child_id}/#{@sleep.date}", :notice => "Sleep created successfully."
     else
       render 'new'
     end
@@ -36,13 +36,13 @@ class SleepsController < ApplicationController
 
     @sleep.category = params[:category]
     @sleep.date = params[:date]
-    @sleep.time = params[:time]
+    @sleep.time = params[:hour] + ":" + params[:minutes] + " " + params[:ampm]
     @sleep.duration_hours = params[:duration_hours]
     @sleep.child_id = params[:child_id]
     @sleep.user_id = params[:user_id]
 
     if @sleep.save
-      redirect_to "/sleeps", :notice => "Sleep updated successfully."
+      redirect_to "/children/#{@sleep.child_id}/#{@sleep.date}", :notice => "Sleep updated successfully."
     else
       render 'edit'
     end
@@ -53,6 +53,6 @@ class SleepsController < ApplicationController
 
     @sleep.destroy
 
-    redirect_to "/sleeps", :notice => "Sleep deleted."
+    redirect_to :back, :notice => "Sleep deleted."
   end
 end

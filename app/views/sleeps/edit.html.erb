@@ -18,7 +18,13 @@
       Category
     </label>
     <div class="col-sm-10">
-      <input type="text" id="category" name="category" placeholder="Category" class="form-control" value="<%= @sleep.category %>">
+      <select type="text" id="category" name="category" class="form-control">
+        <% if @sleep.category != nil %>
+          <option value="<%= @sleep.category %>" selected><%= @sleep.category %></option>
+        <% end %>
+        <option value="Nap">Nap</option>
+        <option value="Night Sleep">Night Sleep</option>
+      </select>
     </div>
   </div>
 
@@ -39,12 +45,47 @@
   </script>
 
   <!-- Label and input for time -->
-  <div class="form-group">
+  <div class="form-group form-inline">
     <label for="time" class="col-sm-2 control-label">
       Time
     </label>
     <div class="col-sm-10">
-      <input type="text" id="time" name="time" placeholder="Time" class="form-control" value="<%= @sleep.time %>">
+      <select type="text" id="hour" name="hour" class="form-control">
+        <% if @sleep.time != nil %>
+          <option value="<%= @sleep.time.strftime('%I') %>" selected><%= @sleep.time.strftime("%I") %></option>
+        <% end %>
+        <option value="01">01</option>
+        <option value="02">02</option>
+        <option value="03">03</option>
+        <option value="04">04</option>
+        <option value="05">05</option>
+        <option value="06">06</option>
+        <option value="07">07</option>
+        <option value="08">08</option>
+        <option value="09">09</option>
+        <option value="10">10</option>
+        <option value="11">11</option>
+        <option value="12">12</option>
+      </select>
+      :
+      <select type="text" id="minutes" name="minutes" class="form-control">
+        <% if @sleep.time != nil %>
+          <option value="<%= @sleep.time.strftime('%M') %>"><%= @sleep.time.strftime("%M") %></option>
+        <% end %>
+        <option value="00">00</option>
+        <option value="10">10</option>
+        <option value="20">20</option>
+        <option value="30">30</option>
+        <option value="40">40</option>
+        <option value="50">50</option>
+      </select>
+      <select type="text" id="ampm" name="ampm" class="form-control">
+        <% if @sleep.time != nil %>
+          <option value="<%= @sleep.time.strftime('%p') %>"><%= @sleep.time.strftime("%p") %></option>
+        <% end %>
+        <option value="AM">AM</option>
+        <option value="PM">PM</option>
+      </select>
     </div>
   </div>
 
@@ -54,7 +95,7 @@
       Duration hours
     </label>
     <div class="col-sm-10">
-      <input type="text" id="duration_hours" name="duration_hours" placeholder="Duration hours" class="form-control" value="<%= @sleep.duration_hours %>">
+      <input type="text" id="duration_hours" name="duration_hours" placeholder="X.X (hours)" class="form-control" value="<%= @sleep.duration_hours %>">
     </div>
   </div>
 
@@ -64,15 +105,21 @@
       Child
     </label>
     <div class="col-sm-10">
-      <input type="text" id="child_id" name="child_id" placeholder="Child" class="form-control" value="<%= @sleep.child_id %>">
+      <select name="child_id" class="form-control">
+        <% if @sleep.child_id != nil %>
+          <option value="<%= @sleep.child_id %>" selected><%= Child.find(@sleep.child_id).name %></option>
+        <% end %>
+        <% current_user.editable_children.each do |child| %>
+          <option value="<%= child.id %>">
+            <%= child.name %>
+          </option>
+        <% end %>
+      </select>
     </div>
   </div>
 
   <!-- Label and input for user_id -->
   <div class="form-group">
-    <label for="user_id" class="col-sm-2 control-label">
-      User
-    </label>
     <div class="col-sm-10">
       <input type="hidden" id="user_id" name="user_id" placeholder="User" class="form-control" value="<%= current_user.id %>">
     </div>
