@@ -26,14 +26,18 @@
           </a>
         </td>
         <td>
-<!--           <a href="/edit_permissions/<%= edit_permission.id %>/edit" class="btn btn-warning">
-            <i class="fa fa-edit"></i>
-          </a> -->
+          <% if edit_permission.child.owning_users.include?(current_user) %>
+<!--             <a href="/edit_permissions/<%= edit_permission.id %>/edit" class="btn btn-warning">
+              <i class="fa fa-edit"></i>
+            </a> -->
+          <% end %>
         </td>
         <td>
-          <a href="/delete_edit_permission/<%= edit_permission.id %>" class="btn btn-danger">
-            <i class="fa fa-trash-o"></i>
-          </a>
+          <% if edit_permission.child.owning_users.include?(current_user) %>
+            <a href="/delete_edit_permission/<%= edit_permission.id %>" class="btn btn-danger">
+              <i class="fa fa-trash-o"></i>
+            </a>
+          <% end %>
         </td>
       </tr>
     <% end %>

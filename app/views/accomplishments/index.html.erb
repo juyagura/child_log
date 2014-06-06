@@ -36,14 +36,18 @@
           </a>
         </td>
         <td>
-          <a href="/accomplishments/<%= accomplishment.id %>/edit" class="btn btn-warning">
-            <i class="fa fa-edit"></i>
-          </a>
+          <% if accomplishment.child.editing_users.include?(current_user) %>
+            <a href="/accomplishments/<%= accomplishment.id %>/edit" class="btn btn-warning">
+              <i class="fa fa-edit"></i>
+            </a>
+          <% end %>
         </td>
         <td>
-          <a href="/delete_accomplishment/<%= accomplishment.id %>" class="btn btn-danger">
-            <i class="fa fa-trash-o"></i>
-          </a>
+          <% if accomplishment.child.editing_users.include?(current_user) %>
+            <a href="/delete_accomplishment/<%= accomplishment.id %>" class="btn btn-danger">
+              <i class="fa fa-trash-o"></i>
+            </a>
+          <% end %>
         </td>
       </tr>
     <% end %>

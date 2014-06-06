@@ -28,14 +28,18 @@
           </a>
         </td>
         <td>
-          <a href="/children/<%= child.id %>/edit" class="btn btn-warning">
-            <i class="fa fa-edit"></i>
-          </a>
+          <% if child.owning_users.include?(current_user) %>
+            <a href="/children/<%= child.id %>/edit" class="btn btn-warning">
+              <i class="fa fa-edit"></i>
+            </a>
+          <% end %>
         </td>
         <td>
-          <a href="/delete_child/<%= child.id %>" class="btn btn-danger">
-            <i class="fa fa-trash-o"></i>
-          </a>
+          <% if child.owning_users.include?(current_user) %>
+            <a href="/delete_child/<%= child.id %>" class="btn btn-danger">
+              <i class="fa fa-trash-o"></i>
+            </a>
+          <% end %>
         </td>
       </tr>
     <% end %>
