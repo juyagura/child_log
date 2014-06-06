@@ -26,12 +26,12 @@
   <tbody>
     <% @sleeps.each do |sleep| %>
       <tr>
-        <td><a href="/children/<%= sleep.child_id %>/dayview/<%= Date.today %>"><%= Child.find(sleep.child_id).name %></a></td>
+        <td><a href="/children/<%= sleep.child_id %>/dayview/<%= Date.today %>"><%= sleep.child.name %></a></td>
         <td><%= sleep.date %></td>
         <td><%= sleep.time.strftime("%I:%M %p") %></td>
         <td><%= sleep.category %></td>
         <td><%= sleep.duration_hours %></td>
-        <td><%= User.find(sleep.user_id).username %></td>
+        <td><%= sleep.user.username %></td>
         <td>
           <a href="/sleeps/<%= sleep.id %>" class="btn btn-primary">
             <i class="fa fa-search-plus"></i>

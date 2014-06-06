@@ -1,22 +1,34 @@
 class ChildrenController < ApplicationController
+  before_action(:set_child, :only => [:show, :dayview, :edit, :update, :destroy])
+  before_action(:signed_in_user_must_be_owner, :only => [:edit, :update, :destroy])
+
+  def set_child
+    @child = Child.find(params[:id])
+  end
+
+  def signed_in_user_must_be_owner
+    unless @child.owning_users.include?(current_user)
+      redirect_to root_url, :alert => "You do not have the permission for the action."
+    end
+  end
+
   def index
     @children = current_user.viewable_children
   end
 
   def show
-    @child = Child.find(params[:id])
   end
 
   def dayview
-    @child = Child.find(params[:id])
-    @foods = Food.where({ :child_id => params[:id], :date => params[:date] }).order("time desc")
-    @sleeps = Sleep.where({ :child_id => params[:id], :date => params[:date] }).order("time desc")
-    @diapers = Diaper.where({ :child_id => params[:id], :date => params[:date] }).order("time desc")
-    @baths = Bath.where({ :child_id => params[:id], :date => params[:date] }).order("time desc")
-    @healths = Health.where({ :child_id => params[:id], :date => params[:date] }).order("time desc")
-    @accomplishments = Accomplishment.where({ :child_id => params[:id], :date => params[:date] }).order("time desc")
-    @notes = Note.where({ :child_id => params[:id], :date => params[:date] })
-    @photos = Photo.where({ :child_id => params[:id], :date => params[:date] })
+    @foods = @child.foods.where({ :date => params[:date] }).order("time desc")
+    @sleeps = @child.sleeps.where({ :date => params[:date] }).order("time desc")
+    @diapers = @child.diapers.where({ :date => params[:date] }).order("time desc")
+    @baths = @child.baths.where({ :date => params[:date] }).order("time desc")
+    @healths = @child.healths.where({ :date => params[:date] }).order("time desc")
+    @accomplishments = @child.accomplishments.where({ :date => params[:date] }).order("time desc")
+    @notes = @child.notes.where({ :date => params[:date] }).order("id desc")
+    @photos = @child.photos.where({ :date => params[:date] }).order("id desc")
+
   end
 
   def datepick
@@ -57,12 +69,9 @@ class ChildrenController < ApplicationController
   end
 
   def edit
-    @child = Child.find(params[:id])
   end
 
   def update
-    @child = Child.find(params[:id])
-
     @child.name = params[:name]
     @child.dob = params[:dob]
     @child.sex = params[:sex]
@@ -75,10 +84,8 @@ class ChildrenController < ApplicationController
   end
 
   def destroy
-    @child = Child.find(params[:id])
-
     @child.destroy
 
-    redirect_to "/children", :notice => "Child deleted."
+    redirect_to :back, :notice => "Child deleted."
   end
 end

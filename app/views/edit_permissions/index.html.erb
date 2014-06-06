@@ -18,8 +18,8 @@
   <tbody>
     <% @edit_permissions.each do |edit_permission| %>
       <tr>
-        <td><%= edit_permission.child_id %></td>
-        <td><%= edit_permission.user_id %></td>
+        <td><%= edit_permission.child.name %></td>
+        <td><%= edit_permission.user.username %></td>
         <td>
           <a href="/edit_permissions/<%= edit_permission.id %>" class="btn btn-primary">
             <i class="fa fa-search-plus"></i>

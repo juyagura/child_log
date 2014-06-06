@@ -1,4 +1,18 @@
 class DiapersController < ApplicationController
+  before_action(:set_diaper, :only => [:show, :edit, :update, :destroy])
+  before_action(:signed_in_user_must_be_editor, :only => [:edit, :update, :destroy])
+
+  def set_diaper
+    @diaper = Diaper.find(params[:id])
+  end
+
+  def signed_in_user_must_be_editor
+    unless @diaper.child.editing_users.include?(current_user)
+      redirect_to root_url, :alert => "You do not have the permission for the action."
+    end
+  end
+
+
   def index
     @diapers = current_user.viewable_diapers.order("date desc, time desc")
   end
@@ -9,7 +23,6 @@ class DiapersController < ApplicationController
   end
 
   def show
-    @diaper = Diaper.find(params[:id])
   end
 
   def new
@@ -26,18 +39,16 @@ class DiapersController < ApplicationController
     @diaper.user_id = params[:user_id]
 
     if @diaper.save
-      redirect_to "/children/#{@diaper.child_id}/#{@diaper.date}", :notice => "Diaper created successfully."
+      redirect_to "/children/#{@diaper.child_id}/dayview/#{@diaper.date}", :notice => "Diaper created successfully."
     else
       render 'new'
     end
   end
 
   def edit
-    @diaper = Diaper.find(params[:id])
   end
 
   def update
-    @diaper = Diaper.find(params[:id])
 
     @diaper.category = params[:category]
     @diaper.description = params[:description]
@@ -47,14 +58,13 @@ class DiapersController < ApplicationController
     @diaper.user_id = params[:user_id]
 
     if @diaper.save
-      redirect_to "/children/#{@diaper.child_id}/#{@diaper.date}", :notice => "Diaper updated successfully."
+      redirect_to "/children/#{@diaper.child_id}/dayview/#{@diaper.date}", :notice => "Diaper updated successfully."
     else
       render 'edit'
     end
   end
 
   def destroy
-    @diaper = Diaper.find(params[:id])
 
     @diaper.destroy
 

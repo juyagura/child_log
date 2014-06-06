@@ -26,12 +26,12 @@
   <tbody>
     <% @foods.each do |food| %>
       <tr>
-        <td><a href="/children/<%= food.child_id %>/dayview/<%= Date.today %>"><%= Child.find(food.child_id).name %></a></td>
+        <td><a href="/children/<%= food.child_id %>/dayview/<%= Date.today %>"><%= food.child.name %></a></td>
         <td><%= food.date %></td>
         <td><%= food.time.strftime("%I:%M %p") %></td>
         <td><%= food.category %></td>
         <td><%= food.description %></td>
-        <td><%= User.find(food.user_id).username %></td>
+        <td><%= food.user.username %></td>
         <td>
           <a href="/foods/<%= food.id %>" class="btn btn-primary">
             <i class="fa fa-search-plus"></i>

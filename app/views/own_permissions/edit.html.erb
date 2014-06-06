@@ -20,7 +20,7 @@
     <div class="col-sm-10">
       <select name="child_id" class="form-control">
         <% if @own_permission.child_id != nil %>
-          <option value="<%= @own_permission.child_id %>" selected><%= Child.find(@own_permission.child_id).name %></option>
+          <option value="<%= @own_permission.child_id %>" selected><%= @own_permission.child.name %></option>
         <% end %>
         <% current_user.own_children.each do |child| %>
           <option value="<%= child.id %>">

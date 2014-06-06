@@ -5,7 +5,7 @@
     <form action="/datepick" class="form-inline">
       <a href="/children/<%= params[:id] %>/dayview/<%= params[:date].to_date - 1 %>">&lt;&lt;Previous Day&nbsp;</a>
         <div class="form-group">
-          <input type="text" id="datepicker" name="date" placeholder="Pick a Date" class="form-control">
+          <input type="text" id="datepicker" name="date" placeholder="Pick a Date" class="form-control" value="<%= params[:date] %>">
         </div>
 
         <script type="text/javascript">
@@ -15,7 +15,10 @@
         </script>
 
         <input type="hidden" name="child_id" value="<%= @child.id %>">
-        <button type="submit" class="btn btn-default">Go</button>
+        <div class="form-group">
+          <input type="submit" value="Go" class="btn btn-default">
+        </div>
+        <!-- <button type="submit" class="btn btn-default">Go</button> -->
       <a href="/children/<%= params[:id] %>/dayview/<%= params[:date].to_date + 1 %>">&nbsp;Next Day&gt;&gt;</a>
     </form>
   </h4>
@@ -34,388 +37,404 @@
   <% end %>
 </div>
 
-<div>
-  <a href="/children/<%= @child.id %>/foods"><h2>Feedings</h2></a>
-  <% if @child.editing_users.include?(current_user) %>
-    <p><a href="/foods/new" class="btn btn-primary">Add a New Food</a></p>
-  <% end %>
-  <table class="table table-hover">
-    <thead>
-      <tr>
-        <th>Category</th>
-        <th>Description</th>
-        <th>Time</th>
-        <th>User</th>
-        <th></th>
-        <th></th>
-        <th></th>
-      </tr>
-    </thead>
-
-    <tbody>
-      <% @foods.each do |food| %>
+<div class="row">
+  <div class="col-md-12">
+    <a href="/children/<%= @child.id %>/foods"><h2>Feedings</h2></a>
+    <% if @child.editing_users.include?(current_user) %>
+      <p><a href="/foods/new" class="btn btn-primary">Add a New Food</a></p>
+    <% end %>
+    <table class="table table-hover">
+      <thead>
         <tr>
-          <td><%= food.category %></td>
-          <td><%= food.description %></td>
-          <td><%= food.time.strftime("%I:%M %p") %></td>
-          <td><%= User.find(food.user_id).username %></td>
-          <td>
-            <a href="/foods/<%= food.id %>" class="btn btn-primary">
-              <i class="fa fa-search-plus"></i>
-            </a>
-          </td>
-          <td>
-            <% if @child.editing_users.include?(current_user) %>
-              <a href="/foods/<%= food.id %>/edit" class="btn btn-warning">
-                <i class="fa fa-edit"></i>
-              </a>
-            <% end %>
-          </td>
-          <td>
-            <% if @child.editing_users.include?(current_user) %>
-              <a href="/delete_food/<%= food.id %>" class="btn btn-danger">
-                <i class="fa fa-trash-o"></i>
-              </a>
-            <% end %>
-          </td>
+          <th>Category</th>
+          <th>Description</th>
+          <th>Time</th>
+          <th>User</th>
+          <th></th>
+          <th></th>
+          <th></th>
         </tr>
-      <% end %>
-    </tbody>
-  </table>
-</div>
+      </thead>
 
-<div>
-  <a href="/children/<%= @child.id %>/sleeps"><h2>Sleeps</h2></a>
-  <% if @child.editing_users.include?(current_user) %>
-    <p><a href="/sleeps/new" class="btn btn-primary">Add a New Sleep</a></p>
-  <% end %>
-  <table class="table table-hover">
-    <thead>
-      <tr>
-        <th>Category</th>
-        <th>Time</th>
-        <th>Duration hours</th>
-        <th>User</th>
-        <th></th>
-        <th></th>
-        <th></th>
-      </tr>
-    </thead>
-
-    <tbody>
-      <% @sleeps.each do |sleep| %>
-        <tr>
-          <td><%= sleep.category %></td>
-          <td><%= sleep.time.strftime("%I:%M %p") %></td>
-          <td><%= sleep.duration_hours %></td>
-          <td><%= User.find(sleep.user_id).username %></td>
-          <td>
-              <a href="/sleeps/<%= sleep.id %>" class="btn btn-primary">
+      <tbody>
+        <% @foods.each do |food| %>
+          <tr>
+            <td><%= food.category %></td>
+            <td><%= food.description %></td>
+            <td><%= food.time.strftime("%I:%M %p") %></td>
+            <td><%= food.user.username %></td>
+            <td>
+              <a href="/foods/<%= food.id %>" class="btn btn-primary">
                 <i class="fa fa-search-plus"></i>
               </a>
-          </td>
-          <td>
-            <% if @child.editing_users.include?(current_user) %>
-              <a href="/sleeps/<%= sleep.id %>/edit" class="btn btn-warning">
-                <i class="fa fa-edit"></i>
-              </a>
-            <% end %>
-          </td>
-          <td>
-            <% if @child.editing_users.include?(current_user) %>
-              <a href="/delete_sleep/<%= sleep.id %>" class="btn btn-danger">
-                <i class="fa fa-trash-o"></i>
-              </a>
-            <% end %>
-          </td>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
+            </td>
+            <td>
+              <% if @child.editing_users.include?(current_user) %>
+                <a href="/foods/<%= food.id %>/edit" class="btn btn-warning">
+                  <i class="fa fa-edit"></i>
+                </a>
+              <% end %>
+            </td>
+            <td>
+              <% if @child.editing_users.include?(current_user) %>
+                <a href="/delete_food/<%= food.id %>" class="btn btn-danger">
+                  <i class="fa fa-trash-o"></i>
+                </a>
+              <% end %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
 </div>
 
-<div>
-  <a href="/children/<%= @child.id %>/diapers"><h2>Diapers</h2></a>
-  <% if @child.editing_users.include?(current_user) %>
-    <p><a href="/diapers/new" class="btn btn-primary">Add a New Diaper</a></p>
-  <% end %>
-  <table class="table table-hover">
-    <thead>
-      <tr>
-        <th>Category</th>
-        <th>Description</th>
-        <th>Time</th>
-        <th>User</th>
-        <th></th>
-        <th></th>
-        <th></th>
-      </tr>
-    </thead>
-
-    <tbody>
-      <% @diapers.each do |diaper| %>
+<div class="row">
+  <div class="col-md-12">
+    <a href="/children/<%= @child.id %>/sleeps"><h2>Sleeps</h2></a>
+    <% if @child.editing_users.include?(current_user) %>
+      <p><a href="/sleeps/new" class="btn btn-primary">Add a New Sleep</a></p>
+    <% end %>
+    <table class="table table-hover">
+      <thead>
         <tr>
-          <td><%= diaper.category %></td>
-          <td><%= diaper.description %></td>
-          <td><%= diaper.time.strftime("%I:%M %p") %></td>
-          <td><%= User.find(diaper.user_id).username %></td>
-          <td>
-            <a href="/diapers/<%= diaper.id %>" class="btn btn-primary">
-              <i class="fa fa-search-plus"></i>
-            </a>
-          </td>
-          <td>
-            <% if @child.editing_users.include?(current_user) %>
-              <a href="/diapers/<%= diaper.id %>/edit" class="btn btn-warning">
-                <i class="fa fa-edit"></i>
-              </a>
-            <% end %>
-          </td>
-          <td>
-            <% if @child.editing_users.include?(current_user) %>
-              <a href="/delete_diaper/<%= diaper.id %>" class="btn btn-danger">
-                <i class="fa fa-trash-o"></i>
-              </a>
-            <% end %>
-          </td>
+          <th>Category</th>
+          <th>Time</th>
+          <th>Duration hours</th>
+          <th>User</th>
+          <th></th>
+          <th></th>
+          <th></th>
         </tr>
-      <% end %>
-    </tbody>
-  </table>
+      </thead>
+
+      <tbody>
+        <% @sleeps.each do |sleep| %>
+          <tr>
+            <td><%= sleep.category %></td>
+            <td><%= sleep.time.strftime("%I:%M %p") %></td>
+            <td><%= sleep.duration_hours %></td>
+            <td><%= sleep.user.username %></td>
+            <td>
+                <a href="/sleeps/<%= sleep.id %>" class="btn btn-primary">
+                  <i class="fa fa-search-plus"></i>
+                </a>
+            </td>
+            <td>
+              <% if @child.editing_users.include?(current_user) %>
+                <a href="/sleeps/<%= sleep.id %>/edit" class="btn btn-warning">
+                  <i class="fa fa-edit"></i>
+                </a>
+              <% end %>
+            </td>
+            <td>
+              <% if @child.editing_users.include?(current_user) %>
+                <a href="/delete_sleep/<%= sleep.id %>" class="btn btn-danger">
+                  <i class="fa fa-trash-o"></i>
+                </a>
+              <% end %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
 </div>
 
-<div>
-  <a href="/children/<%= @child.id %>/baths"><h2>Baths</h2></a>
-  <% if @child.editing_users.include?(current_user) %>
-    <p><a href="/baths/new" class="btn btn-primary">Add a New Bath</a></p>
-  <% end %>
-  <table class="table table-hover">
-    <thead>
-      <tr>
-        <th>Time</th>
-        <th>User</th>
-        <th></th>
-        <th></th>
-        <th></th>
-      </tr>
-    </thead>
-
-    <tbody>
-      <% @baths.each do |bath| %>
+<div class="row">
+  <div class="col-md-12">
+    <a href="/children/<%= @child.id %>/diapers"><h2>Diapers</h2></a>
+    <% if @child.editing_users.include?(current_user) %>
+      <p><a href="/diapers/new" class="btn btn-primary">Add a New Diaper</a></p>
+    <% end %>
+    <table class="table table-hover">
+      <thead>
         <tr>
-          <td><%= bath.time.strftime("%I:%M %p") %></td>
-          <td><%= User.find(bath.user_id).username %></td>
-          <td>
-            <a href="/baths/<%= bath.id %>" class="btn btn-primary">
-              <i class="fa fa-search-plus"></i>
-            </a>
-          </td>
-          <td>
-            <% if @child.editing_users.include?(current_user) %>
-              <a href="/baths/<%= bath.id %>/edit" class="btn btn-warning">
-                <i class="fa fa-edit"></i>
-              </a>
-            <% end %>
-          </td>
-          <td>
-            <% if @child.editing_users.include?(current_user) %>
-              <a href="/delete_bath/<%= bath.id %>" class="btn btn-danger">
-                <i class="fa fa-trash-o"></i>
-              </a>
-            <% end %>
-          </td>
+          <th>Category</th>
+          <th>Description</th>
+          <th>Time</th>
+          <th>User</th>
+          <th></th>
+          <th></th>
+          <th></th>
         </tr>
-      <% end %>
-    </tbody>
-  </table>
+      </thead>
+
+      <tbody>
+        <% @diapers.each do |diaper| %>
+          <tr>
+            <td><%= diaper.category %></td>
+            <td><%= diaper.description %></td>
+            <td><%= diaper.time.strftime("%I:%M %p") %></td>
+            <td><%= diaper.user.username %></td>
+            <td>
+              <a href="/diapers/<%= diaper.id %>" class="btn btn-primary">
+                <i class="fa fa-search-plus"></i>
+              </a>
+            </td>
+            <td>
+              <% if @child.editing_users.include?(current_user) %>
+                <a href="/diapers/<%= diaper.id %>/edit" class="btn btn-warning">
+                  <i class="fa fa-edit"></i>
+                </a>
+              <% end %>
+            </td>
+            <td>
+              <% if @child.editing_users.include?(current_user) %>
+                <a href="/delete_diaper/<%= diaper.id %>" class="btn btn-danger">
+                  <i class="fa fa-trash-o"></i>
+                </a>
+              <% end %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
 </div>
 
-<div>
-  <a href="/children/<%= @child.id %>/healths"><h2>Health Issues</h2></a>
-  <% if @child.editing_users.include?(current_user) %>
-    <p><a href="/healths/new" class="btn btn-primary">Add a New Health</a></p>
-  <% end %>
-  <table class="table table-hover">
-    <thead>
-      <tr>
-        <th>Description</th>
-        <th>Time</th>
-        <th>User</th>
-        <th></th>
-        <th></th>
-        <th></th>
-      </tr>
-    </thead>
-
-    <tbody>
-      <% @healths.each do |health| %>
+<div class="row">
+  <div class="col-md-12">
+    <a href="/children/<%= @child.id %>/baths"><h2>Baths</h2></a>
+    <% if @child.editing_users.include?(current_user) %>
+      <p><a href="/baths/new" class="btn btn-primary">Add a New Bath</a></p>
+    <% end %>
+    <table class="table table-hover">
+      <thead>
         <tr>
-          <td><%= health.description %></td>
-          <td><%= health.time.strftime("%I:%M %p") %></td>
-          <td><%= User.find(health.user_id).username %></td>
-          <td>
-            <a href="/healths/<%= health.id %>" class="btn btn-primary">
-              <i class="fa fa-search-plus"></i>
-            </a>
-          </td>
-          <td>
-            <% if @child.editing_users.include?(current_user) %>
-              <a href="/healths/<%= health.id %>/edit" class="btn btn-warning">
-                <i class="fa fa-edit"></i>
-              </a>
-            <% end %>
-          </td>
-          <td>
-            <% if @child.editing_users.include?(current_user) %>
-              <a href="/delete_health/<%= health.id %>" class="btn btn-danger">
-                <i class="fa fa-trash-o"></i>
-              </a>
-            <% end %>
-          </td>
+          <th>Time</th>
+          <th>User</th>
+          <th></th>
+          <th></th>
+          <th></th>
         </tr>
-      <% end %>
-    </tbody>
-  </table>
+      </thead>
+
+      <tbody>
+        <% @baths.each do |bath| %>
+          <tr>
+            <td><%= bath.time.strftime("%I:%M %p") %></td>
+            <td><%= bath.user.username %></td>
+            <td>
+              <a href="/baths/<%= bath.id %>" class="btn btn-primary">
+                <i class="fa fa-search-plus"></i>
+              </a>
+            </td>
+            <td>
+              <% if @child.editing_users.include?(current_user) %>
+                <a href="/baths/<%= bath.id %>/edit" class="btn btn-warning">
+                  <i class="fa fa-edit"></i>
+                </a>
+              <% end %>
+            </td>
+            <td>
+              <% if @child.editing_users.include?(current_user) %>
+                <a href="/delete_bath/<%= bath.id %>" class="btn btn-danger">
+                  <i class="fa fa-trash-o"></i>
+                </a>
+              <% end %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
 </div>
 
-<div>
-  <a href="/children/<%= @child.id %>/accomplishments"><h2>Accomplishments</h2></a>
-  <% if @child.editing_users.include?(current_user) %>
-    <p><a href="/accomplishments/new" class="btn btn-primary">Add a New Accomplishment</a></p>
-  <% end %>
-  <table class="table table-hover">
-    <thead>
-      <tr>
-        <th>Description</th>
-        <th>Time</th>
-        <th>User</th>
-        <th></th>
-        <th></th>
-        <th></th>
-      </tr>
-    </thead>
-
-    <tbody>
-      <% @accomplishments.each do |accomplishment| %>
+<div class="row">
+  <div class="col-md-12">
+    <a href="/children/<%= @child.id %>/healths"><h2>Health Issues</h2></a>
+    <% if @child.editing_users.include?(current_user) %>
+      <p><a href="/healths/new" class="btn btn-primary">Add a New Health</a></p>
+    <% end %>
+    <table class="table table-hover">
+      <thead>
         <tr>
-          <td><%= accomplishment.description %></td>
-          <td><%= accomplishment.time.strftime("%I:%M %p") %></td>
-          <td><%= User.find(accomplishment.user_id).username %></td>
-          <td>
-            <a href="/accomplishments/<%= accomplishment.id %>" class="btn btn-primary">
-              <i class="fa fa-search-plus"></i>
-            </a>
-          </td>
-          <td>
-            <% if @child.editing_users.include?(current_user) %>
-              <a href="/accomplishments/<%= accomplishment.id %>/edit" class="btn btn-warning">
-                <i class="fa fa-edit"></i>
-              </a>
-            <% end %>
-          </td>
-          <td>
-            <% if @child.editing_users.include?(current_user) %>
-              <a href="/delete_accomplishment/<%= accomplishment.id %>" class="btn btn-danger">
-                <i class="fa fa-trash-o"></i>
-              </a>
-            <% end %>
-          </td>
+          <th>Description</th>
+          <th>Time</th>
+          <th>User</th>
+          <th></th>
+          <th></th>
+          <th></th>
         </tr>
-      <% end %>
-    </tbody>
-  </table>
+      </thead>
+
+      <tbody>
+        <% @healths.each do |health| %>
+          <tr>
+            <td><%= health.description %></td>
+            <td><%= health.time.strftime("%I:%M %p") %></td>
+            <td><%= health.user.username %></td>
+            <td>
+              <a href="/healths/<%= health.id %>" class="btn btn-primary">
+                <i class="fa fa-search-plus"></i>
+              </a>
+            </td>
+            <td>
+              <% if @child.editing_users.include?(current_user) %>
+                <a href="/healths/<%= health.id %>/edit" class="btn btn-warning">
+                  <i class="fa fa-edit"></i>
+                </a>
+              <% end %>
+            </td>
+            <td>
+              <% if @child.editing_users.include?(current_user) %>
+                <a href="/delete_health/<%= health.id %>" class="btn btn-danger">
+                  <i class="fa fa-trash-o"></i>
+                </a>
+              <% end %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
 </div>
 
-<div>
-  <a href="/children/<%= @child.id %>/notes"><h2>Notes (Diary)</h2></a>
-  <% if @child.editing_users.include?(current_user) %>
-    <p><a href="/notes/new" class="btn btn-primary">Add a New Note</a></p>
-  <% end %>
-  <table class="table table-hover">
-    <thead>
-      <tr>
-        <th>Content</th>
-        <th>User</th>
-        <th></th>
-        <th></th>
-        <th></th>
-      </tr>
-    </thead>
-
-    <tbody>
-      <% @notes.each do |note| %>
+<div class="row">
+  <div class="col-md-12">
+    <a href="/children/<%= @child.id %>/accomplishments"><h2>Accomplishments</h2></a>
+    <% if @child.editing_users.include?(current_user) %>
+      <p><a href="/accomplishments/new" class="btn btn-primary">Add a New Accomplishment</a></p>
+    <% end %>
+    <table class="table table-hover">
+      <thead>
         <tr>
-          <td><%= note.content %></td>
-          <td><%= User.find(note.user_id).username %></td>
-          <td>
-            <a href="/notes/<%= note.id %>" class="btn btn-primary">
-              <i class="fa fa-search-plus"></i>
-            </a>
-          </td>
-          <td>
-            <% if @child.editing_users.include?(current_user) %>
-              <a href="/notes/<%= note.id %>/edit" class="btn btn-warning">
-                <i class="fa fa-edit"></i>
-              </a>
-            <% end %>
-          </td>
-          <td>
-            <% if @child.editing_users.include?(current_user) %>
-              <a href="/delete_note/<%= note.id %>" class="btn btn-danger">
-                <i class="fa fa-trash-o"></i>
-              </a>
-            <% end %>
-          </td>
+          <th>Description</th>
+          <th>Time</th>
+          <th>User</th>
+          <th></th>
+          <th></th>
+          <th></th>
         </tr>
-      <% end %>
-    </tbody>
-  </table>
+      </thead>
+
+      <tbody>
+        <% @accomplishments.each do |accomplishment| %>
+          <tr>
+            <td><%= accomplishment.description %></td>
+            <td><%= accomplishment.time.strftime("%I:%M %p") %></td>
+            <td><%= accomplishment.user.username %></td>
+            <td>
+              <a href="/accomplishments/<%= accomplishment.id %>" class="btn btn-primary">
+                <i class="fa fa-search-plus"></i>
+              </a>
+            </td>
+            <td>
+              <% if @child.editing_users.include?(current_user) %>
+                <a href="/accomplishments/<%= accomplishment.id %>/edit" class="btn btn-warning">
+                  <i class="fa fa-edit"></i>
+                </a>
+              <% end %>
+            </td>
+            <td>
+              <% if @child.editing_users.include?(current_user) %>
+                <a href="/delete_accomplishment/<%= accomplishment.id %>" class="btn btn-danger">
+                  <i class="fa fa-trash-o"></i>
+                </a>
+              <% end %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
 </div>
 
-<div>
-  <a href="/children/<%= @child.id %>/photos"><h2>Photos</h2></a>
-  <% if @child.editing_users.include?(current_user) %>
-    <p><a href="/photos/new" class="btn btn-primary">Add a New Photo</a></p>
-  <% end %>
-  <table class="table table-hover">
-    <thead>
-      <tr>
-        <th>Image</th>
-        <th>Caption</th>
-        <th>User</th>
-        <th></th>
-        <th></th>
-        <th></th>
-      </tr>
-    </thead>
-
-    <tbody>
-      <% @photos.each do |photo| %>
+<div class="row">
+  <div class="col-md-12">
+    <a href="/children/<%= @child.id %>/notes"><h2>Notes (Diary)</h2></a>
+    <% if @child.editing_users.include?(current_user) %>
+      <p><a href="/notes/new" class="btn btn-primary">Add a New Note</a></p>
+    <% end %>
+    <table class="table table-hover">
+      <thead>
         <tr>
-          <td><img src="<%= photo.image %>"></td>
-          <td><%= photo.caption %></td>
-          <td><%= User.find(photo.user_id).username %></td>
-          <td>
-            <a href="/photos/<%= photo.id %>" class="btn btn-primary">
-              <i class="fa fa-search-plus"></i>
-            </a>
-          </td>
-          <td>
-            <% if @child.editing_users.include?(current_user) %>
-              <a href="/photos/<%= photo.id %>/edit" class="btn btn-warning">
-                <i class="fa fa-edit"></i>
-              </a>
-            <% end %>
-          </td>
-          <td>
-            <% if @child.editing_users.include?(current_user) %>
-              <a href="/delete_photo/<%= photo.id %>" class="btn btn-danger">
-                <i class="fa fa-trash-o"></i>
-              </a>
-            <% end %>
-          </td>
+          <th>Content</th>
+          <th>User</th>
+          <th></th>
+          <th></th>
+          <th></th>
         </tr>
-      <% end %>
-    </tbody>
-  </table>
+      </thead>
+
+      <tbody>
+        <% @notes.each do |note| %>
+          <tr>
+            <td><%= note.content %></td>
+            <td><%= note.user.username %></td>
+            <td>
+              <a href="/notes/<%= note.id %>" class="btn btn-primary">
+                <i class="fa fa-search-plus"></i>
+              </a>
+            </td>
+            <td>
+              <% if @child.editing_users.include?(current_user) %>
+                <a href="/notes/<%= note.id %>/edit" class="btn btn-warning">
+                  <i class="fa fa-edit"></i>
+                </a>
+              <% end %>
+            </td>
+            <td>
+              <% if @child.editing_users.include?(current_user) %>
+                <a href="/delete_note/<%= note.id %>" class="btn btn-danger">
+                  <i class="fa fa-trash-o"></i>
+                </a>
+              <% end %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+    <a href="/children/<%= @child.id %>/photos"><h2>Photos</h2></a>
+    <% if @child.editing_users.include?(current_user) %>
+      <p><a href="/photos/new" class="btn btn-primary">Add a New Photo</a></p>
+    <% end %>
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th>Image</th>
+          <th>Caption</th>
+          <th>User</th>
+          <th></th>
+          <th></th>
+          <th></th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% @photos.each do |photo| %>
+          <tr>
+            <td><img src="<%= photo.image %>"></td>
+            <td><%= photo.caption %></td>
+            <td><%= photo.user.username %></td>
+            <td>
+              <a href="/photos/<%= photo.id %>" class="btn btn-primary">
+                <i class="fa fa-search-plus"></i>
+              </a>
+            </td>
+            <td>
+              <% if @child.editing_users.include?(current_user) %>
+                <a href="/photos/<%= photo.id %>/edit" class="btn btn-warning">
+                  <i class="fa fa-edit"></i>
+                </a>
+              <% end %>
+            </td>
+            <td>
+              <% if @child.editing_users.include?(current_user) %>
+                <a href="/delete_photo/<%= photo.id %>" class="btn btn-danger">
+                  <i class="fa fa-trash-o"></i>
+                </a>
+              <% end %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
 </div>

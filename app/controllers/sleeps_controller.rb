@@ -1,4 +1,18 @@
 class SleepsController < ApplicationController
+  before_action(:set_sleep, :only => [:show, :edit, :update, :destroy])
+  before_action(:signed_in_user_must_be_editor, :only => [:edit, :update, :destroy])
+
+  def set_sleep
+    @sleep = Sleep.find(params[:id])
+  end
+
+  def signed_in_user_must_be_editor
+    unless @sleep.child.editing_users.include?(current_user)
+      redirect_to root_url, :alert => "You do not have the permission for the action."
+    end
+  end
+
+
   def index
     @sleeps = current_user.viewable_sleeps.order("date desc, time desc")
   end
@@ -9,7 +23,6 @@ class SleepsController < ApplicationController
   end
 
   def show
-    @sleep = Sleep.find(params[:id])
   end
 
   def new
@@ -26,18 +39,16 @@ class SleepsController < ApplicationController
     @sleep.user_id = params[:user_id]
 
     if @sleep.save
-      redirect_to "/children/#{@sleep.child_id}/#{@sleep.date}", :notice => "Sleep created successfully."
+      redirect_to "/children/#{@sleep.child_id}/dayview/#{@sleep.date}", :notice => "Sleep created successfully."
     else
       render 'new'
     end
   end
 
   def edit
-    @sleep = Sleep.find(params[:id])
   end
 
   def update
-    @sleep = Sleep.find(params[:id])
 
     @sleep.category = params[:category]
     @sleep.date = params[:date]
@@ -47,14 +58,13 @@ class SleepsController < ApplicationController
     @sleep.user_id = params[:user_id]
 
     if @sleep.save
-      redirect_to "/children/#{@sleep.child_id}/#{@sleep.date}", :notice => "Sleep updated successfully."
+      redirect_to "/children/#{@sleep.child_id}/dayview/#{@sleep.date}", :notice => "Sleep updated successfully."
     else
       render 'edit'
     end
   end
 
   def destroy
-    @sleep = Sleep.find(params[:id])
 
     @sleep.destroy
 

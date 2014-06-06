@@ -1,4 +1,18 @@
 class AccomplishmentsController < ApplicationController
+  before_action(:set_accomplishment, :only => [:show, :edit, :update, :destroy])
+  before_action(:signed_in_user_must_be_editor, :only => [:edit, :update, :destroy])
+
+  def set_accomplishment
+    @accomplishment = Accomplishment.find(params[:id])
+  end
+
+  def signed_in_user_must_be_editor
+    unless @accomplishment.child.editing_users.include?(current_user)
+      redirect_to root_url, :alert => "You do not have the permission for the action."
+    end
+  end
+
+
   def index
     @accomplishments = current_user.viewable_accomplishments.order("date desc, time desc")
   end
@@ -9,7 +23,6 @@ class AccomplishmentsController < ApplicationController
   end
 
   def show
-    @accomplishment = Accomplishment.find(params[:id])
   end
 
   def new
@@ -25,18 +38,16 @@ class AccomplishmentsController < ApplicationController
     @accomplishment.user_id = params[:user_id]
 
     if @accomplishment.save
-      redirect_to "/children/#{@accomplishment.child_id}/#{@accomplishment.date}", :notice => "Accomplishment created successfully."
+      redirect_to "/children/#{@accomplishment.child_id}/dayview/#{@accomplishment.date}", :notice => "Accomplishment created successfully."
     else
       render 'new'
     end
   end
 
   def edit
-    @accomplishment = Accomplishment.find(params[:id])
   end
 
   def update
-    @accomplishment = Accomplishment.find(params[:id])
 
     @accomplishment.description = params[:description]
     @accomplishment.date = params[:date]
@@ -45,14 +56,13 @@ class AccomplishmentsController < ApplicationController
     @accomplishment.user_id = params[:user_id]
 
     if @accomplishment.save
-      redirect_to "/children/#{@accomplishment.child_id}/#{@accomplishment.date}", :notice => "Accomplishment updated successfully."
+      redirect_to "/children/#{@accomplishment.child_id}/dayview/#{@accomplishment.date}", :notice => "Accomplishment updated successfully."
     else
       render 'edit'
     end
   end
 
   def destroy
-    @accomplishment = Accomplishment.find(params[:id])
 
     @accomplishment.destroy
 

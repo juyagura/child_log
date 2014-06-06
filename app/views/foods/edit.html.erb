@@ -103,7 +103,7 @@
     <div class="col-sm-10">
       <select name="child_id" class="form-control">
         <% if @food.child_id != nil %>
-          <option value="<%= @food.child_id %>" selected><%= Child.find(@food.child_id).name %></option>
+          <option value="<%= @food.child_id %>" selected><%= @food.child.name %></option>
         <% end %>
         <% current_user.editable_children.each do |child| %>
           <option value="<%= child.id %>">
