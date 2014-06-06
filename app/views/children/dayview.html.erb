@@ -41,7 +41,7 @@
   <div class="col-md-12">
     <a href="/children/<%= @child.id %>/foods"><h2>Feedings</h2></a>
     <% if @child.editing_users.include?(current_user) %>
-      <p><a href="/foods/new" class="btn btn-primary">Add a New Food</a></p>
+      <p><a href="/foods/new?child_id=<%= @child.id %>" class="btn btn-primary">Add a New Food</a></p>
     <% end %>
     <table class="table table-hover">
       <thead>
@@ -93,7 +93,7 @@
   <div class="col-md-12">
     <a href="/children/<%= @child.id %>/sleeps"><h2>Sleeps</h2></a>
     <% if @child.editing_users.include?(current_user) %>
-      <p><a href="/sleeps/new" class="btn btn-primary">Add a New Sleep</a></p>
+      <p><a href="/sleeps/new?child_id=<%= @child.id %>" class="btn btn-primary">Add a New Sleep</a></p>
     <% end %>
     <table class="table table-hover">
       <thead>
@@ -145,7 +145,7 @@
   <div class="col-md-12">
     <a href="/children/<%= @child.id %>/diapers"><h2>Diapers</h2></a>
     <% if @child.editing_users.include?(current_user) %>
-      <p><a href="/diapers/new" class="btn btn-primary">Add a New Diaper</a></p>
+      <p><a href="/diapers/new?child_id=<%= @child.id %>" class="btn btn-primary">Add a New Diaper</a></p>
     <% end %>
     <table class="table table-hover">
       <thead>
@@ -197,7 +197,7 @@
   <div class="col-md-12">
     <a href="/children/<%= @child.id %>/baths"><h2>Baths</h2></a>
     <% if @child.editing_users.include?(current_user) %>
-      <p><a href="/baths/new" class="btn btn-primary">Add a New Bath</a></p>
+      <p><a href="/baths/new?child_id=<%= @child.id %>" class="btn btn-primary">Add a New Bath</a></p>
     <% end %>
     <table class="table table-hover">
       <thead>
@@ -245,7 +245,7 @@
   <div class="col-md-12">
     <a href="/children/<%= @child.id %>/healths"><h2>Health Issues</h2></a>
     <% if @child.editing_users.include?(current_user) %>
-      <p><a href="/healths/new" class="btn btn-primary">Add a New Health</a></p>
+      <p><a href="/healths/new?child_id=<%= @child.id %>" class="btn btn-primary">Add a New Health</a></p>
     <% end %>
     <table class="table table-hover">
       <thead>
@@ -295,7 +295,7 @@
   <div class="col-md-12">
     <a href="/children/<%= @child.id %>/accomplishments"><h2>Accomplishments</h2></a>
     <% if @child.editing_users.include?(current_user) %>
-      <p><a href="/accomplishments/new" class="btn btn-primary">Add a New Accomplishment</a></p>
+      <p><a href="/accomplishments/new?child_id=<%= @child.id %>" class="btn btn-primary">Add a New Accomplishment</a></p>
     <% end %>
     <table class="table table-hover">
       <thead>
@@ -345,7 +345,7 @@
   <div class="col-md-12">
     <a href="/children/<%= @child.id %>/notes"><h2>Notes (Diary)</h2></a>
     <% if @child.editing_users.include?(current_user) %>
-      <p><a href="/notes/new" class="btn btn-primary">Add a New Note</a></p>
+      <p><a href="/notes/new?child_id=<%= @child.id %>" class="btn btn-primary">Add a New Note</a></p>
     <% end %>
     <table class="table table-hover">
       <thead>
@@ -393,7 +393,7 @@
   <div class="col-md-12">
     <a href="/children/<%= @child.id %>/photos"><h2>Photos</h2></a>
     <% if @child.editing_users.include?(current_user) %>
-      <p><a href="/photos/new" class="btn btn-primary">Add a New Photo</a></p>
+      <p><a href="/photos/new?child_id=<%= @child.id %>" class="btn btn-primary">Add a New Photo</a></p>
     <% end %>
     <% @photos.each do |photo| %>
       <div class="row" id="photo_<%= photo.id %>">
