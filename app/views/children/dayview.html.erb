@@ -395,6 +395,73 @@
     <% if @child.editing_users.include?(current_user) %>
       <p><a href="/photos/new" class="btn btn-primary">Add a New Photo</a></p>
     <% end %>
+    <% @photos.each do |photo| %>
+      <div class="row" id="photo_<%= photo.id %>">
+        <div class="col-md-2 col-md-offset-1">
+          <div class="pull-left">
+            <p class="text-right">
+              Posted by <%= photo.user.username %>
+            </p>
+            <p class="text-right"><%= time_ago_in_words(photo.created_at) %> ago</p>
+          </div>
+        </div>
+        <div class="col-md-6 well">
+          <div class="thumbnail">
+            <a href="/photos/<%= photo.id %>">
+            <img src="<%= photo.image_url %>" width="320">
+            </a>
+            <div class="caption">
+              <p class="lead"><%= photo.caption %></p>
+              <p>
+                <a href="/photos/<%= photo.id %>" class="btn btn-primary">
+                  <i class="fa fa-search-plus"></i>
+                </a>
+                <% if photo.child.editing_users.include?(current_user) %>
+                  <a href="/photos/<%= photo.id %>/edit" class="btn btn-warning">
+                    <i class="fa fa-edit"></i>
+                  </a>
+
+                  <a href="/delete_photo/<%= photo.id %>" class="btn btn-danger">
+                    <i class="fa fa-trash-o"></i>
+                  </a>
+                <% end %>
+              </p>
+              <ul>
+                <% photo.photo_comments.each do |photo_comment| %>
+                  <li>
+                    <p><%= photo_comment.content %></p>
+                    <p><%= photo_comment.user.username %> (<%= time_ago_in_words(photo_comment.created_at) %> ago)</p>
+                  </li>
+                <% end %>
+              </ul>
+                <form action="/create_photo_comment">
+                  <div class="form-group">
+                    <textarea id="content" name="content" placeholder="Add your comment" class="form-control" rows="3"></textarea>
+                  </div>
+
+                  <input type="hidden" id="photo_id" name="photo_id" value="<%= photo.id %>">
+
+                  <input type="hidden" id="user_id" name="user_id" value="<%= current_user.id %>">
+
+                  <div class="form-group">
+                    <input type="submit" value="Create Comment" class="btn btn-primary">
+                  </div>
+                </form>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+<!-- <div class="row">
+  <div class="col-md-12">
+    <a href="/children/<%= @child.id %>/photos"><h2>Photos</h2></a>
+    <% if @child.editing_users.include?(current_user) %>
+      <p><a href="/photos/new" class="btn btn-primary">Add a New Photo</a></p>
+    <% end %>
     <table class="table table-hover">
       <thead>
         <tr>
@@ -437,4 +504,4 @@
       </tbody>
     </table>
   </div>
-</div>
+</div> -->

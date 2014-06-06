@@ -25,7 +25,9 @@
     </div>
     <div class="col-md-6 well">
       <div class="thumbnail">
-        <img src="<%= photo.image_url %>">
+        <a href="/photos/<%= photo.id %>">
+        <img src="<%= photo.image_url %>" width="320">
+        </a>
         <div class="caption">
           <p class="lead"><%= photo.caption %></p>
           <p>
@@ -42,6 +44,27 @@
               </a>
             <% end %>
           </p>
+          <ul>
+            <% photo.photo_comments.each do |photo_comment| %>
+              <li>
+                <p><%= photo_comment.content %></p>
+                <p><%= photo_comment.user.username %> (<%= time_ago_in_words(photo_comment.created_at) %> ago)</p>
+              </li>
+            <% end %>
+          </ul>
+            <form action="/create_photo_comment">
+              <div class="form-group">
+                <textarea id="content" name="content" placeholder="Add your comment" class="form-control" rows="3"></textarea>
+              </div>
+
+              <input type="hidden" id="photo_id" name="photo_id" value="<%= photo.id %>">
+
+              <input type="hidden" id="user_id" name="user_id" value="<%= current_user.id %>">
+
+              <div class="form-group">
+                <input type="submit" value="Create Comment" class="btn btn-primary">
+              </div>
+            </form>
         </div>
       </div>
 

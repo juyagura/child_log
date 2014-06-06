@@ -2,58 +2,63 @@
   <h1>Photo #<%= @photo.id %></h1>
 </div>
 
-<dl class="dl-horizontal">
-  <dt>Image</dt>
-  <dd><img src="<%= @photo.image %>" width="320"></dd>
+<div class="row" id="photo_<%= @photo.id %>">
+  <div class="col-md-2 col-md-offset-1">
+    <div class="pull-left">
+      <p class="text-right">
+        <a href="/children/<%= @photo.child_id %>/dayview/<%= Date.today %>">
+          <%= @photo.child.name %>
+        </a>
+      </p>
+      <p class="text-right">
+        Posted by <%= @photo.user.username %>
+      </p>
+      <p class="text-right"><%= time_ago_in_words(@photo.created_at) %> ago</p>
+    </div>
+  </div>
+  <div class="col-md-6 well">
+    <div class="thumbnail">
+      <img src="<%= @photo.image_url %>" width="320">
+      <div class="caption">
+        <p class="lead"><%= @photo.caption %></p>
+        <p>
+          <a href="/photos/<%= @photo.id %>" class="btn btn-primary">
+            <i class="fa fa-search-plus"></i>
+          </a>
+          <% if @photo.child.editing_users.include?(current_user) %>
+            <a href="/photos/<%= @photo.id %>/edit" class="btn btn-warning">
+              <i class="fa fa-edit"></i>
+            </a>
 
-  <dt>Caption</dt>
-  <dd><%= @photo.caption %></dd>
+            <a href="/delete_photo/<%= @photo.id %>" class="btn btn-danger">
+              <i class="fa fa-trash-o"></i>
+            </a>
+          <% end %>
+        </p>
+        <ul>
+          <% @photo.photo_comments.each do |photo_comment| %>
+            <li>
+              <p><%= photo_comment.content %></p>
+              <p><%= photo_comment.user.username %> (<%= time_ago_in_words(photo_comment.created_at) %> ago)</p>
+            </li>
+          <% end %>
+        </ul>
+          <form action="/create_photo_comment">
+            <div class="form-group">
+              <textarea id="content" name="content" placeholder="Add your comment" class="form-control" rows="3"></textarea>
+            </div>
 
-  <dt>User</dt>
-  <dd><%= @photo.user.username %></dd>
+            <input type="hidden" id="photo_id" name="photo_id" value="<%= @photo.id %>">
 
-</dl>
+            <input type="hidden" id="user_id" name="user_id" value="<%= current_user.id %>">
 
-<ul>
-  <% @photo.photo_comments.each do |photo_comment| %>
-    <li>
-      <h4><%= photo_comment.user.email %></h4>
-      <p><%= photo_comment.content %></p>
-    </li>
-  <% end %>
-  <li>
-    <form action="/create_photo_comment">
-      <textarea id="content" name="content" placeholder="Add your comment" class="form-control" rows="3"></textarea>
-
-      <input type="hidden" id="photo_id" name="photo_id" value="<%= @photo.id %>">
-
-      <input type="hidden" id="user_id" name="user_id" value="<%= current_user.id %>">
-
-      <input type="submit" value="Create Comment" class="btn btn-primary">
-    </form>
-  </li>
-</ul>
-
-
-
-<!-- <div class="page-header">
-  <h1>Photo #<%= @photo.id %></h1>
+            <div class="form-group">
+              <input type="submit" value="Create Comment" class="btn btn-primary">
+            </div>
+          </form>
+      </div>
+    </div>
+  </div>
 </div>
 
-<dl class="dl-horizontal">
-  <dt>Image</dt>
-  <dd><%= @photo.image %></dd>
 
-  <dt>Date</dt>
-  <dd><%= @photo.date %></dd>
-
-  <dt>Caption</dt>
-  <dd><%= @photo.caption %></dd>
-
-  <dt>User</dt>
-  <dd><%= @photo.user_id %></dd>
-
-  <dt>Child</dt>
-  <dd><%= @photo.child_id %></dd>
-
-</dl> -->
