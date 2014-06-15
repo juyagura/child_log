@@ -13,6 +13,9 @@
 
 ActiveRecord::Schema.define(version: 20140604210043) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "accomplishments", force: true do |t|
     t.text     "description"
     t.date     "date"
@@ -140,8 +143,8 @@ ActiveRecord::Schema.define(version: 20140604210043) do
     t.datetime "updated_at"
   end
 
-  add_index "users", ["email"], name: "index_users_on_email", unique: true
-  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+  add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
+  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
   create_table "view_permissions", force: true do |t|
     t.integer  "child_id"
