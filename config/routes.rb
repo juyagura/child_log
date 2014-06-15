@@ -225,6 +225,7 @@ Rails.application.routes.draw do
   get('/children/:id', { :controller => 'children', :action => 'show' })
   get('/children/:id/dayview/:date', { :controller => 'children', :action => 'dayview' })
   get('/datepick', { :controller => 'children', :action => 'datepick' })
+  get('/children/:id/today', { :controller => 'children', :action => 'childtoday' })
 
   # UPDATE
   get('/children/:id/edit', { :controller => 'children', :action => 'edit' })

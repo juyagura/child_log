@@ -19,6 +19,10 @@ class ChildrenController < ApplicationController
   def show
   end
 
+  def childtoday
+    redirect_to "/children/#{params[:id]}/dayview/#{Date.today}"
+  end
+
   def dayview
     @foods = @child.foods.where({ :date => params[:date] }).order("time desc")
     @sleeps = @child.sleeps.where({ :date => params[:date] }).order("time desc")
