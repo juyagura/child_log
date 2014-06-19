@@ -46,9 +46,9 @@
     <table class="table table-hover">
       <thead>
         <tr>
+          <th>Time</th>
           <th>Category</th>
           <th>Description</th>
-          <th>Time</th>
           <th>User</th>
           <th></th>
           <th></th>
@@ -58,9 +58,9 @@
       <tbody>
         <% @foods.each do |food| %>
           <tr>
+            <td><%= food.time.strftime("%I:%M %p") %></td>
             <td><%= food.category %></td>
             <td><%= food.description %></td>
-            <td><%= food.time.strftime("%I:%M %p") %></td>
             <td><%= food.user.username %></td>
             <td>
               <% if @child.editing_users.include?(current_user) %>
@@ -92,8 +92,8 @@
     <table class="table table-hover">
       <thead>
         <tr>
-          <th>Category</th>
           <th>Time</th>
+          <th>Category</th>
           <th>Duration hours</th>
           <th>User</th>
           <th></th>
@@ -104,8 +104,8 @@
       <tbody>
         <% @sleeps.each do |sleep| %>
           <tr>
-            <td><%= sleep.category %></td>
             <td><%= sleep.time.strftime("%I:%M %p") %></td>
+            <td><%= sleep.category %></td>
             <td><%= sleep.duration_hours %></td>
             <td><%= sleep.user.username %></td>
             <td>
@@ -138,9 +138,9 @@
     <table class="table table-hover">
       <thead>
         <tr>
+          <th>Time</th>
           <th>Category</th>
           <th>Description</th>
-          <th>Time</th>
           <th>User</th>
           <th></th>
           <th></th>
@@ -150,9 +150,9 @@
       <tbody>
         <% @diapers.each do |diaper| %>
           <tr>
+            <td><%= diaper.time.strftime("%I:%M %p") %></td>
             <td><%= diaper.category %></td>
             <td><%= diaper.description %></td>
-            <td><%= diaper.time.strftime("%I:%M %p") %></td>
             <td><%= diaper.user.username %></td>
             <td>
               <% if @child.editing_users.include?(current_user) %>
@@ -226,8 +226,8 @@
     <table class="table table-hover">
       <thead>
         <tr>
-          <th>Description</th>
           <th>Time</th>
+          <th>Description</th>
           <th>User</th>
           <th></th>
           <th></th>
@@ -237,8 +237,8 @@
       <tbody>
         <% @healths.each do |health| %>
           <tr>
-            <td><%= health.description %></td>
             <td><%= health.time.strftime("%I:%M %p") %></td>
+            <td><%= health.description %></td>
             <td><%= health.user.username %></td>
             <td>
               <% if @child.editing_users.include?(current_user) %>
@@ -270,8 +270,8 @@
     <table class="table table-hover">
       <thead>
         <tr>
-          <th>Description</th>
           <th>Time</th>
+          <th>Description</th>
           <th>User</th>
           <th></th>
           <th></th>
@@ -281,8 +281,8 @@
       <tbody>
         <% @accomplishments.each do |accomplishment| %>
           <tr>
-            <td><%= accomplishment.description %></td>
             <td><%= accomplishment.time.strftime("%I:%M %p") %></td>
+            <td><%= accomplishment.description %></td>
             <td><%= accomplishment.user.username %></td>
             <td>
               <% if @child.editing_users.include?(current_user) %>
