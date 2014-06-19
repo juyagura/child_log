@@ -19,7 +19,6 @@
       <th>User</th>
       <th></th>
       <th></th>
-      <th></th>
     </tr>
   </thead>
 
@@ -32,11 +31,6 @@
         <td><%= diaper.category %></td>
         <td><%= diaper.description %></td>
         <td><%= diaper.user.username %></td>
-        <td>
-          <a href="/diapers/<%= diaper.id %>" class="btn btn-primary">
-            <i class="fa fa-search-plus"></i>
-          </a>
-        </td>
         <td>
           <% if diaper.child.editing_users.include?(current_user) %>
             <a href="/diapers/<%= diaper.id %>/edit" class="btn btn-warning">

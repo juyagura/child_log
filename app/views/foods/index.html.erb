@@ -19,7 +19,6 @@
       <th>User</th>
       <th></th>
       <th></th>
-      <th></th>
     </tr>
   </thead>
 
@@ -32,11 +31,6 @@
         <td><%= food.category %></td>
         <td><%= food.description %></td>
         <td><%= food.user.username %></td>
-        <td>
-          <a href="/foods/<%= food.id %>" class="btn btn-primary">
-            <i class="fa fa-search-plus"></i>
-          </a>
-        </td>
         <td>
           <% if food.child.editing_users.include?(current_user) %>
             <a href="/foods/<%= food.id %>/edit" class="btn btn-warning">

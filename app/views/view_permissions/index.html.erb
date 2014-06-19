@@ -10,28 +10,16 @@
       <th>Child</th>
       <th>User</th>
       <th></th>
-      <th></th>
-      <th></th>
     </tr>
   </thead>
 
   <tbody>
     <% @view_permissions.each do |view_permission| %>
       <tr>
-        <td><%= view_permission.child.name %></td>
+        <td>
+          <a href="/children/<%= view_permission.child.id %>/dayview/<%= Date.today %>"><%= view_permission.child.name %></a>
+        </td>
         <td><%= view_permission.user.username %></td>
-        <td>
-          <a href="/view_permissions/<%= view_permission.id %>" class="btn btn-primary">
-            <i class="fa fa-search-plus"></i>
-          </a>
-        </td>
-        <td>
-          <% if view_permission.child.owning_users.include?(current_user) %>
-            <!-- <a href="/view_permissions/<%= view_permission.id %>/edit" class="btn btn-warning">
-              <i class="fa fa-edit"></i>
-            </a> -->
-          <% end %>
-        </td>
         <td>
           <% if view_permission.child.owning_users.include?(current_user) %>
             <a href="/delete_view_permission/<%= view_permission.id %>" class="btn btn-danger">

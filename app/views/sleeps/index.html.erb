@@ -19,7 +19,6 @@
       <th>User</th>
       <th></th>
       <th></th>
-      <th></th>
     </tr>
   </thead>
 
@@ -32,11 +31,6 @@
         <td><%= sleep.category %></td>
         <td><%= sleep.duration_hours %></td>
         <td><%= sleep.user.username %></td>
-        <td>
-          <a href="/sleeps/<%= sleep.id %>" class="btn btn-primary">
-            <i class="fa fa-search-plus"></i>
-          </a>
-        </td>
         <td>
           <% if sleep.child.editing_users.include?(current_user) %>
             <a href="/sleeps/<%= sleep.id %>/edit" class="btn btn-warning">

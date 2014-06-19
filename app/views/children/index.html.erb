@@ -11,8 +11,6 @@
       <th>Date of Birth</th>
       <th>Sex</th>
       <th></th>
-      <th></th>
-      <th></th>
     </tr>
   </thead>
 
@@ -22,11 +20,6 @@
         <td><a href="/children/<%= child.id %>/today"><%= child.name %></a></td>
         <td><%= child.dob %></td>
         <td><%= child.sex %></td>
-        <td>
-          <a href="/children/<%= child.id %>" class="btn btn-primary">
-            <i class="fa fa-search-plus"></i>
-          </a>
-        </td>
         <td>
           <% if child.owning_users.include?(current_user) %>
             <a href="/children/<%= child.id %>/edit" class="btn btn-warning">
