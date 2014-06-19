@@ -23,7 +23,7 @@
     </form>
   </h4>
   <% if current_user.own_children.include?(@child) %>
-    <div class="row">
+<!--     <div class="row">
       <div class="col-md-2">
         <a href="/own_permissions/new?child_id=<%= @child.id %>"><button class="btn btn-warning">Add Owner</button></a>
       </div>
@@ -33,7 +33,7 @@
       <div class="col-md-8">
         <a href="/view_permissions/new?child_id=<%= @child.id %>"><button class="btn btn-warning">Add Viewer</button></a>
       </div>
-    </div>
+    </div> -->
   <% end %>
 </div>
 
@@ -52,7 +52,6 @@
           <th>User</th>
           <th></th>
           <th></th>
-          <th></th>
         </tr>
       </thead>
 
@@ -63,11 +62,6 @@
             <td><%= food.description %></td>
             <td><%= food.time.strftime("%I:%M %p") %></td>
             <td><%= food.user.username %></td>
-            <td>
-              <a href="/foods/<%= food.id %>" class="btn btn-primary">
-                <i class="fa fa-search-plus"></i>
-              </a>
-            </td>
             <td>
               <% if @child.editing_users.include?(current_user) %>
                 <a href="/foods/<%= food.id %>/edit" class="btn btn-warning">
@@ -104,7 +98,6 @@
           <th>User</th>
           <th></th>
           <th></th>
-          <th></th>
         </tr>
       </thead>
 
@@ -115,11 +108,6 @@
             <td><%= sleep.time.strftime("%I:%M %p") %></td>
             <td><%= sleep.duration_hours %></td>
             <td><%= sleep.user.username %></td>
-            <td>
-                <a href="/sleeps/<%= sleep.id %>" class="btn btn-primary">
-                  <i class="fa fa-search-plus"></i>
-                </a>
-            </td>
             <td>
               <% if @child.editing_users.include?(current_user) %>
                 <a href="/sleeps/<%= sleep.id %>/edit" class="btn btn-warning">
@@ -156,7 +144,6 @@
           <th>User</th>
           <th></th>
           <th></th>
-          <th></th>
         </tr>
       </thead>
 
@@ -167,11 +154,6 @@
             <td><%= diaper.description %></td>
             <td><%= diaper.time.strftime("%I:%M %p") %></td>
             <td><%= diaper.user.username %></td>
-            <td>
-              <a href="/diapers/<%= diaper.id %>" class="btn btn-primary">
-                <i class="fa fa-search-plus"></i>
-              </a>
-            </td>
             <td>
               <% if @child.editing_users.include?(current_user) %>
                 <a href="/diapers/<%= diaper.id %>/edit" class="btn btn-warning">
@@ -206,7 +188,6 @@
           <th>User</th>
           <th></th>
           <th></th>
-          <th></th>
         </tr>
       </thead>
 
@@ -215,11 +196,6 @@
           <tr>
             <td><%= bath.time.strftime("%I:%M %p") %></td>
             <td><%= bath.user.username %></td>
-            <td>
-              <a href="/baths/<%= bath.id %>" class="btn btn-primary">
-                <i class="fa fa-search-plus"></i>
-              </a>
-            </td>
             <td>
               <% if @child.editing_users.include?(current_user) %>
                 <a href="/baths/<%= bath.id %>/edit" class="btn btn-warning">
@@ -255,7 +231,6 @@
           <th>User</th>
           <th></th>
           <th></th>
-          <th></th>
         </tr>
       </thead>
 
@@ -265,11 +240,6 @@
             <td><%= health.description %></td>
             <td><%= health.time.strftime("%I:%M %p") %></td>
             <td><%= health.user.username %></td>
-            <td>
-              <a href="/healths/<%= health.id %>" class="btn btn-primary">
-                <i class="fa fa-search-plus"></i>
-              </a>
-            </td>
             <td>
               <% if @child.editing_users.include?(current_user) %>
                 <a href="/healths/<%= health.id %>/edit" class="btn btn-warning">
@@ -305,7 +275,6 @@
           <th>User</th>
           <th></th>
           <th></th>
-          <th></th>
         </tr>
       </thead>
 
@@ -315,11 +284,6 @@
             <td><%= accomplishment.description %></td>
             <td><%= accomplishment.time.strftime("%I:%M %p") %></td>
             <td><%= accomplishment.user.username %></td>
-            <td>
-              <a href="/accomplishments/<%= accomplishment.id %>" class="btn btn-primary">
-                <i class="fa fa-search-plus"></i>
-              </a>
-            </td>
             <td>
               <% if @child.editing_users.include?(current_user) %>
                 <a href="/accomplishments/<%= accomplishment.id %>/edit" class="btn btn-warning">
@@ -354,7 +318,6 @@
           <th>User</th>
           <th></th>
           <th></th>
-          <th></th>
         </tr>
       </thead>
 
@@ -363,11 +326,6 @@
           <tr>
             <td><%= note.content %></td>
             <td><%= note.user.username %></td>
-            <td>
-              <a href="/notes/<%= note.id %>" class="btn btn-primary">
-                <i class="fa fa-search-plus"></i>
-              </a>
-            </td>
             <td>
               <% if @child.editing_users.include?(current_user) %>
                 <a href="/notes/<%= note.id %>/edit" class="btn btn-warning">
