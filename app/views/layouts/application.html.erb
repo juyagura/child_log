@@ -42,6 +42,22 @@
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
+        <% if @child.present? %>
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">New <b class="caret"></b></a>
+            <ul class="dropdown-menu">
+              <li><a href="/foods/new?child_id=<%= @child.id %>&amp;date=<%= Date.today %>">Food</a></li>
+              <li><a href="/sleeps/new?child_id=<%= @child.id %>&amp;date=<%= Date.today %>">Sleep</a></li>
+              <li><a href="/diapers/new?child_id=<%= @child.id %>&amp;date=<%= Date.today %>">Diaper</a></li>
+              <li><a href="/baths/new?child_id=<%= @child.id %>&amp;date=<%= Date.today %>">Bath</a></li>
+              <li><a href="/healths/new?child_id=<%= @child.id %>&amp;date=<%= Date.today %>">Health</a></li>
+              <li><a href="/accomplishments/new?child_id=<%= @child.id %>&amp;date=<%= Date.today %>">Accomplishment</a></li>
+              <li><a href="/notes/new?child_id=<%= @child.id %>&amp;date=<%= Date.today %>">Note</a></li>
+              <li><a href="/photos/new?child_id=<%= @child.id %>&amp;date=<%= Date.today %>">Photo</a></li>
+            </ul>
+          </li>
+        <% end %>
+<!--
         <li><a href="/children">Children</a></li>
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown">Activities <b class="caret"></b></a>
@@ -56,6 +72,7 @@
             <li><a href="/photos">Photos</a></li>
           </ul>
         </li>
+-->
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown">Manage Permissions <b class="caret"></b></a>
           <ul class="dropdown-menu">
